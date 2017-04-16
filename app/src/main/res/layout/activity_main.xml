@@ -12,7 +12,7 @@
         android:stretchMode="columnWidth"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/grid"
+        android:id="@+id/categories_grid_view"
         android:background="@color/colorPrimaryLight"
         />
 
