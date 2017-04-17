@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Intent intent = new Intent(MainActivity.this, QuizActivity.class)
+                Intent intent = new Intent(MainActivity.this, QuestionActivityFragment.class)
                         .putExtra("position", position);
                 startActivity(intent);
 //                Toast.makeText(MainActivity.this, "" + position,
