@@ -55,5 +55,6 @@
     <string name="image_gadgets">@drawable/ic_category_gadgets</string>
     <string name="image_anime">@drawable/ic_category_anime</string>
     <string name="image_cartoon">@drawable/ic_category_cartoon</string>
+    <string name="title_activity_quiz">QuizActivity</string>
 
 </resources>

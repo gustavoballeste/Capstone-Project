@@ -1,5 +1,6 @@
 package com.gustavoballeste.capstone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,8 +23,11 @@ public class MainActivity extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Toast.makeText(MainActivity.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, QuizActivity.class)
+                        .putExtra("position", position);
+                startActivity(intent);
+//                Toast.makeText(MainActivity.this, "" + position,
+//                        Toast.LENGTH_SHORT).show();
             }
         });
     }
