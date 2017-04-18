@@ -3,12 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="4dip"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QuestionActivityFragment">
+    android:background="@color/colorPrimaryLight"
+    tools:context=".PagerActivityFragment">
 
+    <TextView
+        android:id="@+id/category_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textSize="@dimen/abc_text_size_title_material"
+        android:gravity="center_horizontal"/>
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
@@ -16,24 +23,12 @@
         android:layout_weight="1">
     </android.support.v4.view.ViewPager>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:measureWithLargestChild="true"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/goto_next"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0">
-        <Button
-            android:id="@+id/goto_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="First">
-        </Button>
-        <Button
-            android:id="@+id/goto_last"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last">
-        </Button>
-    </LinearLayout>
+        android:textAllCaps="false"
+        android:text="Next"
+        android:layout_marginBottom="16dp">
+    </Button>
 </LinearLayout>

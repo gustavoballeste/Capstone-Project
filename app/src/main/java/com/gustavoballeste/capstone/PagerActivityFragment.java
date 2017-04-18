@@ -5,22 +5,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 /**
  * Created by gustavoballeste on 17/04/17.
  */
 
-public class QuestionActivityFragment extends FragmentActivity {
+public class PagerActivityFragment extends FragmentActivity {
     static final int NUM_ITEMS = 10;
 
     MyAdapter mAdapter;
@@ -37,14 +33,11 @@ public class QuestionActivityFragment extends FragmentActivity {
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
+        TextView textView = (TextView)findViewById(R.id.category_text_view);
+        textView.setText(getIntent().getExtras().getString("category"));
+
         // Watch for button clicks.
-        Button button = (Button)findViewById(R.id.goto_first);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mPager.setCurrentItem(0);
-            }
-        });
-        button = (Button)findViewById(R.id.goto_last);
+        Button button = (Button)findViewById(R.id.goto_next);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mPager.setCurrentItem(NUM_ITEMS-1);
@@ -64,19 +57,19 @@ public class QuestionActivityFragment extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ArrayListFragment.newInstance(position);
+            return QuestionFragment.newInstance(position);
         }
     }
 
-    public static class ArrayListFragment extends ListFragment {
+    public static class QuestionFragment extends Fragment {
         int mNum;
 
         /**
          * Create a new instance of CountingFragment, providing "num"
          * as an argument.
          */
-        static ArrayListFragment newInstance(int num) {
-            ArrayListFragment f = new ArrayListFragment();
+        static QuestionFragment newInstance(int num) {
+            QuestionFragment f = new QuestionFragment();
 
             // Supply num input as an argument.
             Bundle args = new Bundle();
@@ -92,7 +85,7 @@ public class QuestionActivityFragment extends FragmentActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            mNum = getArguments() != null ? getArguments().getInt("num") : 1;
+            mNum = getArguments() != null ? getArguments().getInt("num")+1 : 1;
         }
 
         /**
@@ -103,8 +96,9 @@ public class QuestionActivityFragment extends FragmentActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View v = inflater.inflate(R.layout.fragment_pager_list, container, false);
-            View tv = v.findViewById(R.id.text);
-            ((TextView)tv).setText("Fragment #" + mNum);
+            View countTv = v.findViewById(R.id.count);
+            ((TextView)countTv).setText(mNum+"/10");
+
             return v;
         }
 
@@ -112,14 +106,11 @@ public class QuestionActivityFragment extends FragmentActivity {
         public void onActivityCreated(Bundle savedInstanceState) {
             String[] item = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
             super.onActivityCreated(savedInstanceState);
-            setListAdapter(new ArrayAdapter<>(getActivity(),
-                    android.R.layout.simple_list_item_1, item)); //Incluir aqui um List<Question> de QuestionMock getQuestionMock()
+//            setListAdapter(new ArrayAdapter<>(getActivity(),
+//                    android.R.layout.simple_list_item_1, item)); //Incluir aqui um List<Question> de QuestionMock getQuestionMock()
         }
 
-        @Override
-        public void onListItemClick(ListView l, View v, int position, long id) {
-            Log.i("FragmentList", "Item clicked: " + id);
-        }
+
     }
 
 }

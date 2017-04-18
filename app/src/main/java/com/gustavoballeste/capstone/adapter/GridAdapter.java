@@ -1,4 +1,4 @@
-package com.gustavoballeste.capstone;
+package com.gustavoballeste.capstone.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +7,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomGrid extends BaseAdapter{
+import com.gustavoballeste.capstone.R;
+
+public class GridAdapter extends BaseAdapter{
     private Context mContext;
 
-    public CustomGrid(Context c) {
+    public GridAdapter(Context c) {
         mContext = c;
 
     }
@@ -46,8 +48,8 @@ public class CustomGrid extends BaseAdapter{
         } else {
             grid = convertView;
         }
-        TextView textView = (TextView) grid.findViewById(R.id.grid_text);
-        ImageView imageView = (ImageView)grid.findViewById(R.id.grid_image);
+        TextView textView = (TextView) grid.findViewById(R.id.category_description_text_view);
+        ImageView imageView = (ImageView)grid.findViewById(R.id.category_image_view);
         textView.setText(description[position]);
         imageView.setImageResource(imageId[position]);
 

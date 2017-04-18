@@ -1,4 +1,4 @@
-package com.gustavoballeste.capstone.Mock;
+package com.gustavoballeste.capstone.mock;
 
 import com.gustavoballeste.capstone.model.Question;
 
