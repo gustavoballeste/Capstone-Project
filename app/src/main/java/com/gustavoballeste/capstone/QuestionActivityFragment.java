@@ -12,16 +12,44 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.gustavoballeste.capstone.data.QuestionContract;
+import com.gustavoballeste.capstone.model.Question;
+
 /**
  * Created by gustavoballeste on 17/04/17.
  */
 
-public class PagerActivityFragment extends FragmentActivity {
+public class QuestionActivityFragment extends FragmentActivity {
     static final int NUM_ITEMS = 10;
 
     MyAdapter mAdapter;
 
     ViewPager mPager;
+
+    private static final int MOVIES_LOADER = 0;
+
+    public static final String[] QUESTION_COLUMNS = {
+            QuestionContract.QuestionEntry._ID,
+            QuestionContract.QuestionEntry.COLUMN_STATEMENT,
+            QuestionContract.QuestionEntry.COLUMN_CATEGORY,
+            QuestionContract.QuestionEntry.COLUMN_TYPE,
+            QuestionContract.QuestionEntry.COLUMN_DIFFICULTY,
+            QuestionContract.QuestionEntry.COLUMN_CORRECT_ANSWER,
+            QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER1,
+            QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER2,
+            QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER3,
+    };
+
+    public static final int COL_ID = 0;
+    public static final int COL_STATEMENT = 1;
+    public static final int COL_CATEGORY = 2;
+    public static final int COL_TYPE = 3;
+    public static final int COL_DIFFICULTY = 4;
+    public static final int COL_CORRECT_ANSWER = 5;
+    public static final int COL_INCORRECT_ANSWER1 = 6;
+    public static final int COL_INCORRECT_ANSWER2 = 7;
+    public static final int COL_INCORRECT_ANSWER3 = 8;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

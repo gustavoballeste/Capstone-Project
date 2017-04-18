@@ -3,9 +3,11 @@ package com.gustavoballeste.capstone;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gustavoballeste.capstone.adapter.GridAdapter;
@@ -24,9 +26,16 @@ public class MainActivity extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
+
+
                 TextView tv = (TextView)findViewById(R.id.category_description_text_view);
                 String category = tv.getText().toString();
-                Intent intent = new Intent(MainActivity.this, PagerActivityFragment.class)
+                Log.e("Category","Category = " + category);
+
+                Log.e("Position","Position = " + position);
+
+
+                Intent intent = new Intent(MainActivity.this, QuestionActivityFragment.class)
                         .putExtra("category", category);
                 startActivity(intent);
             }
