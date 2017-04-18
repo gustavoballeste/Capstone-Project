@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:paddingBottom="16dp"/>
+        android:padding="8dp"/>
 
     <!--Question-->
     <android.support.v7.widget.CardView

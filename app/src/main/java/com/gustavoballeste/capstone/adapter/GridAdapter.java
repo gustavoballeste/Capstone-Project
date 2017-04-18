@@ -12,6 +12,8 @@ import com.gustavoballeste.capstone.R;
 public class GridAdapter extends BaseAdapter{
     private Context mContext;
 
+    public String mCategory;
+
     public GridAdapter(Context c) {
         mContext = c;
 
@@ -50,7 +52,8 @@ public class GridAdapter extends BaseAdapter{
         }
         TextView textView = (TextView) grid.findViewById(R.id.category_description_text_view);
         ImageView imageView = (ImageView)grid.findViewById(R.id.category_image_view);
-        textView.setText(description[position]);
+        mCategory = description[position];
+        textView.setText(mCategory);
         imageView.setImageResource(imageId[position]);
 
         return grid;

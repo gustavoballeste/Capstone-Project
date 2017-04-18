@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.gustavoballeste.capstone.QuestionActivityFragment;
+import com.gustavoballeste.capstone.QuestionFragment;
 
 /**
  * Created by gustavoballeste on 17/04/17.
@@ -44,17 +44,17 @@ public class Question implements Parcelable {
     }
 
     public Question(Cursor cursor){
-        String id = cursor.getString(QuestionActivityFragment.COL_ID);
+        String id = cursor.getString(QuestionFragment.COL_ID);
 
-        this.id = cursor.getInt(cursor.getInt(QuestionActivityFragment.COL_ID));
-        this.category = cursor.getString(cursor.getInt(QuestionActivityFragment.COL_CATEGORY));
-        this.type = cursor.getString(cursor.getInt(QuestionActivityFragment.COL_TYPE));
-        this.difficulty = cursor.getString(cursor.getInt(QuestionActivityFragment.COL_DIFFICULTY));
-        this.statement = cursor.getString(cursor.getInt(QuestionActivityFragment.COL_STATEMENT));
-        this.correctAnswer = cursor.getString(cursor.getInt(QuestionActivityFragment.COL_CORRECT_ANSWER));
-        this.incorrectAnswer1 = cursor.getString(cursor.getInt(QuestionActivityFragment.COL_INCORRECT_ANSWER1));
-        this.incorrectAnswer2 = cursor.getString(cursor.getInt(QuestionActivityFragment.COL_INCORRECT_ANSWER2));
-        this.incorrectAnswer3 = cursor.getString(cursor.getInt(QuestionActivityFragment.COL_INCORRECT_ANSWER3));
+        this.id = cursor.getInt(cursor.getInt(QuestionFragment.COL_ID));
+        this.category = cursor.getString(cursor.getInt(QuestionFragment.COL_CATEGORY));
+        this.type = cursor.getString(cursor.getInt(QuestionFragment.COL_TYPE));
+        this.difficulty = cursor.getString(cursor.getInt(QuestionFragment.COL_DIFFICULTY));
+        this.statement = cursor.getString(cursor.getInt(QuestionFragment.COL_STATEMENT));
+        this.correctAnswer = cursor.getString(cursor.getInt(QuestionFragment.COL_CORRECT_ANSWER));
+        this.incorrectAnswer1 = cursor.getString(cursor.getInt(QuestionFragment.COL_INCORRECT_ANSWER1));
+        this.incorrectAnswer2 = cursor.getString(cursor.getInt(QuestionFragment.COL_INCORRECT_ANSWER2));
+        this.incorrectAnswer3 = cursor.getString(cursor.getInt(QuestionFragment.COL_INCORRECT_ANSWER3));
     }
 
     public static final Creator<Question> CREATOR = new Creator<Question>() {

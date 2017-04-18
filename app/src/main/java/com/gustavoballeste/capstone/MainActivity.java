@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gustavoballeste.capstone.adapter.GridAdapter;
@@ -30,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv = (TextView)findViewById(R.id.category_description_text_view);
                 String category = tv.getText().toString();
+
                 Log.e("Category","Category = " + category);
 
                 Log.e("Position","Position = " + position);
 
-
-                Intent intent = new Intent(MainActivity.this, QuestionActivityFragment.class)
+                Intent intent = new Intent(MainActivity.this, QuestionActivity.class)
                         .putExtra("category", category);
                 startActivity(intent);
             }
