@@ -29,10 +29,7 @@ public class QuestionActivity extends AppCompatActivity {
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
-        //Colocar essa informação a AppBar
         getSupportActionBar().setTitle(getIntent().getExtras().getString("category"));
-
-        //        getSupportActionBar().setTitle(getIntent().getExtras().getString("category"));
 
         // Watch for button clicks.
         Button button = (Button)findViewById(R.id.goto_next);

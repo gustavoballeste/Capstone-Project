@@ -88,7 +88,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-//        getLoaderManager().initLoader(QUESTION_LOADER, null, null); ESTA LINHA ESTÁ COM ERRO
+//        getLoaderManager().initLoader(QUESTION_LOADER, null, null); //ESTA LINHA ESTÁ COM ERRO
     }
 
 

@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         GridView grid = (GridView) findViewById(R.id.categories_grid_view);
         grid.setAdapter(new GridAdapter(this));
 
@@ -26,12 +25,10 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
-
-                TextView tv = (TextView)findViewById(R.id.category_description_text_view);
+                TextView tv = (TextView) v.findViewById(R.id.category_description_text_view);
                 String category = tv.getText().toString();
 
                 Log.e("Category","Category = " + category);
-
                 Log.e("Position","Position = " + position);
 
                 Intent intent = new Intent(MainActivity.this, QuestionActivity.class)
@@ -40,5 +37,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 }
