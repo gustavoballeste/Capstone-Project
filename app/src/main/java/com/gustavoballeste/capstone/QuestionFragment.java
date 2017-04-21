@@ -55,6 +55,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
      * as an argument.
      */
     public static QuestionFragment newInstance(int num) {
+        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
         QuestionFragment f = new QuestionFragment();
 
         // Supply num input as an argument.
@@ -70,6 +71,8 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
+
         super.onCreate(savedInstanceState);
         mNum = getArguments() != null ? getArguments().getInt("num")+1 : 1;
     }
@@ -81,6 +84,8 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
+
         View v = inflater.inflate(R.layout.fragment_pager_list, container, false);
         View countTv = v.findViewById(R.id.count);
         ((TextView)countTv).setText(mNum+"/10");
@@ -90,14 +95,16 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         super.onActivityCreated(savedInstanceState);
-//        getLoaderManager().initLoader(QUESTION_LOADER, null, null); //ESTA LINHA ESTÁ COM ERRO
+        getLoaderManager().initLoader(QUESTION_LOADER, null, this);
     }
 
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         Loader<Cursor> cursorLoader;
         cursorLoader = new CursorLoader(getActivity(),
@@ -111,6 +118,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onStart() {
+        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         if (Utility.hasNetworkConnection(getActivity()))
         {
@@ -121,8 +129,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     public void updateData(){
-        Log.d("MoviesFragment_Log_Gus", "updateData");
-
+        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         FetchQuestionTask moviesTask = new FetchQuestionTask(getActivity(), this);
 
@@ -133,24 +140,13 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
     }
 }
-
-//Implementar todos esses métodos
-//public interface Callback {public void onItemSelected(Movie movie);}
-//
-//@Override
-//public void onSaveInstanceState(Bundle outState) {}
-//
-//@Override
-//public void onStart() {}
-
-//
-//public void loadFavorites(){}
-
