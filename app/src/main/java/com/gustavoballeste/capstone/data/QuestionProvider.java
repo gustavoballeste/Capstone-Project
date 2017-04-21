@@ -40,7 +40,7 @@ public class QuestionProvider extends ContentProvider {
     }
 
     private Cursor getQuestionWithID(Uri uri, String[] projection, String sortOrder) {
-        int question_id = QuestionContract.QuestionEntry.getQuestionIDfromUri(uri);
+        int question_id = QuestionContract.QuestionEntry.getQuestionIDFromUri(uri);
 
         sQuestionByIDQueryBuilder.setTables(QuestionContract.QuestionEntry.TABLE_NAME);
 

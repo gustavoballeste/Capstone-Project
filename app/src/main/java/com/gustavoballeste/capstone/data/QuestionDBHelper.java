@@ -18,7 +18,6 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
     final String SQL_CREATE_QUESTION_TABLE = "CREATE TABLE " + QuestionContract.QuestionEntry.TABLE_NAME + " (" +

@@ -51,6 +51,7 @@ public class FetchQuestionTask  extends AsyncTask {
         final String question_correct_answer = "correct_answer";
         final String question_incorrect_answers = "incorrect_answers"; //Um array de 3 strings
 
+
         try {
             int deleted = mContext.getContentResolver().delete(QuestionContract.QuestionEntry.CONTENT_URI, null, null);
             Log.d(LOG_TAG, "Previous data wiping Complete. " + deleted + " Deleted");
@@ -64,9 +65,20 @@ public class FetchQuestionTask  extends AsyncTask {
                 String difficulty = questionJSONObject.getString(question_difficulty);
                 String statement = questionJSONObject.getString(question_statement);
                 String correct_answer = questionJSONObject.getString(question_correct_answer);
-                String incorrect_answer1 = questionJSONObject.getString(question_incorrect_answers+"[1]");
-                String incorrect_answer2 = questionJSONObject.getString(question_incorrect_answers+"[2]");
-                String incorrect_answer3 = questionJSONObject.getString(question_incorrect_answers+"[3]");
+                String incorrect_answer1 = null;
+                String incorrect_answer2 = null;
+                String incorrect_answer3 = null;
+
+                JSONArray incorrectQuestionsArray = questionJSONObject.getJSONArray((question_incorrect_answers));
+                Log.d("incorrectQuestionsArray", incorrectQuestionsArray.toString());
+
+                incorrect_answer1 = incorrectQuestionsArray.get(0).toString();
+                Log.d("incorrect_answer1", incorrect_answer1);
+
+                if (type.equals("multiple")) {
+                    incorrect_answer2 = incorrectQuestionsArray.get(1).toString();
+                    incorrect_answer3 = incorrectQuestionsArray.get(2).toString();
+                }
 
                 ContentValues contentValues = new ContentValues();
 
@@ -103,7 +115,7 @@ public class FetchQuestionTask  extends AsyncTask {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
-        String moviesJsonStr = null;
+        String moviesJsonStr;
 
         try{
 

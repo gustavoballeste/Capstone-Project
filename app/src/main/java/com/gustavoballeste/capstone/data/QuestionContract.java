@@ -13,7 +13,7 @@ import java.security.PublicKey;
 
 public class QuestionContract {
     public static final String CONTENT_AUTHORITY = "com.gustavoballeste.capstone";
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content:// + CONTENT_AUTHORITY");
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String QUESTION_PATH = "question";
 
     public static final class QuestionEntry implements BaseColumns {
@@ -40,7 +40,7 @@ public class QuestionContract {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
 
-        public static int getQuestionIDfromUri(Uri uri){
+        public static int getQuestionIDFromUri(Uri uri){
             return Integer.parseInt(uri.getPathSegments().get(1));
         }
     }

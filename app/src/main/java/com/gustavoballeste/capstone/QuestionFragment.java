@@ -1,11 +1,14 @@
 package com.gustavoballeste.capstone;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 
 import com.gustavoballeste.capstone.adapter.GridAdapter;
 import com.gustavoballeste.capstone.data.QuestionContract;
+import com.gustavoballeste.capstone.query.FetchQuestionTask;
 
 /**
  * Created by gustavoballeste on 18/04/17.
@@ -95,7 +99,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        Loader<Cursor> cursorLoader = null;
+        Loader<Cursor> cursorLoader;
         cursorLoader = new CursorLoader(getActivity(),
                 QuestionContract.QuestionEntry.CONTENT_URI,
                 QUESTION_COLUMNS,
@@ -103,6 +107,28 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
                 null,
                 null);
         return cursorLoader;
+    }
+
+    @Override
+    public void onStart() {
+
+        if (Utility.hasNetworkConnection(getActivity()))
+        {
+            updateData();
+        }
+
+        super.onStart();
+    }
+
+    public void updateData(){
+        Log.d("MoviesFragment_Log_Gus", "updateData");
+
+
+        FetchQuestionTask moviesTask = new FetchQuestionTask(getActivity(), this);
+
+        moviesTask.execute(12);//passar a categoria
+
+        getLoaderManager().restartLoader(QUESTION_LOADER, null, this);
     }
 
     @Override
@@ -124,8 +150,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 //
 //@Override
 //public void onStart() {}
-//
-//public void updateData(){}
+
 //
 //public void loadFavorites(){}
 
