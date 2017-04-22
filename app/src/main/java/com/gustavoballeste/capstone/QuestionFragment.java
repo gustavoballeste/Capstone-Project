@@ -1,9 +1,7 @@
 package com.gustavoballeste.capstone;
 
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -14,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.gustavoballeste.capstone.adapter.GridAdapter;
+import com.gustavoballeste.capstone.adapter.QuestionPagerAdapter;
 import com.gustavoballeste.capstone.data.QuestionContract;
 import com.gustavoballeste.capstone.query.FetchQuestionTask;
 
@@ -24,7 +22,7 @@ import com.gustavoballeste.capstone.query.FetchQuestionTask;
 
 public class QuestionFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     int mNum;
-    private GridAdapter adapter;
+    private QuestionPagerAdapter adapter;
 
     private static final int QUESTION_LOADER = 0;
 
@@ -87,6 +85,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         View v = inflater.inflate(R.layout.fragment_pager_list, container, false);
+
         View countTv = v.findViewById(R.id.count);
         ((TextView)countTv).setText(mNum+"/10");
 
