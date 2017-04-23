@@ -1,4 +1,4 @@
-package com.gustavoballeste.capstone;
+package com.gustavoballeste.capstone.helper;
 
 import android.content.Context;
 import android.content.res.TypedArray;

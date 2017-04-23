@@ -1,7 +1,10 @@
 package com.gustavoballeste.capstone;
 
+import android.annotation.TargetApi;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -10,10 +13,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterViewAnimator;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.gustavoballeste.capstone.adapter.QuestionPagerAdapter;
+import com.gustavoballeste.capstone.adapter.QuestionAdapter;
 import com.gustavoballeste.capstone.data.QuestionContract;
+import com.gustavoballeste.capstone.helper.ApiLevelHelper;
+import com.gustavoballeste.capstone.helper.Utility;
 import com.gustavoballeste.capstone.query.FetchQuestionTask;
 
 /**
@@ -22,7 +29,8 @@ import com.gustavoballeste.capstone.query.FetchQuestionTask;
 
 public class QuestionFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     int mNum;
-    private QuestionPagerAdapter adapter;
+    private QuestionAdapter mAdapter;
+    AdapterViewAnimator mQuestionView;
 
     private static final int QUESTION_LOADER = 0;
 
@@ -49,22 +57,6 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     public static final int COL_INCORRECT_ANSWER3 = 8;
 
     /**
-     * Create a new instance of CountingFragment, providing "num"
-     * as an argument.
-     */
-    public static QuestionFragment newInstance(int num) {
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
-        QuestionFragment f = new QuestionFragment();
-
-        // Supply num input as an argument.
-        Bundle args = new Bundle();
-        args.putInt("num", num);
-        f.setArguments(args);
-
-        return f;
-    }
-
-    /**
      * When creating, retrieve this instance's number from its arguments.
      */
     @Override
@@ -73,6 +65,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
         super.onCreate(savedInstanceState);
         mNum = getArguments() != null ? getArguments().getInt("num")+1 : 1;
+
     }
 
     /**
@@ -84,12 +77,49 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
                              Bundle savedInstanceState) {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
-        View v = inflater.inflate(R.layout.fragment_pager_list, container, false);
+        mAdapter = new QuestionAdapter(getActivity(), null, 0);
 
-        View countTv = v.findViewById(R.id.count);
-        ((TextView)countTv).setText(mNum+"/10");
+        View view = inflater.inflate(R.layout.question_fragment, container, false);
+        mQuestionView = (AdapterViewAnimator) view.findViewById(R.id.question_view_flipper);
+        mQuestionView.setAdapter(mAdapter);
+        mQuestionView.setSelection(0); //Definir aqui a posição do adapter que será apresentada
+        setQuizViewAnimations();
 
-        return v;
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        //Estes objetos estão na list_item_question.xml
+//        View countTv = view.findViewById(R.id.count);
+//        ((TextView)countTv).setText(mNum+"/10");
+
+        // Watch for button clicks.
+//        Button button = (Button) view.findViewById(R.id.goto_next);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                mQuestionView.showNext();
+//            }
+//        });
+
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setQuizViewAnimations() {
+        if (ApiLevelHelper.isLowerThan(Build.VERSION_CODES.LOLLIPOP)) {
+            return;
+        }
+        mQuestionView.setInAnimation(getActivity(), R.animator.slide_in_bottom);
+        mQuestionView.setOutAnimation(getActivity(), R.animator.slide_out_top);
+    }
+
+    private QuestionAdapter getQuizAdapter() {
+        if (null == mAdapter) {
+            mAdapter = new QuestionAdapter(getContext(), null, 0);
+        }
+        return mAdapter;
     }
 
     @Override
@@ -106,6 +136,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         Loader<Cursor> cursorLoader;
+
         cursorLoader = new CursorLoader(getActivity(),
                 QuestionContract.QuestionEntry.CONTENT_URI,
                 QUESTION_COLUMNS,
@@ -140,12 +171,13 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
-
+        mAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
-
+        mAdapter.swapCursor(null);
     }
+
 }

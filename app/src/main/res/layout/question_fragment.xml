@@ -9,19 +9,11 @@
     android:background="@color/colorPrimaryLight"
     tools:context=".QuestionActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <AdapterViewFlipper
+        android:id="@+id/question_view_flipper"
         android:layout_width="match_parent"
-        android:layout_height="0px"
+        android:layout_height="match_parent"
         android:layout_weight="1">
-    </android.support.v4.view.ViewPager>
+    </AdapterViewFlipper>
 
-    <Button
-        android:id="@+id/goto_next"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="Next"
-        android:layout_marginBottom="16dp">
-    </Button>
 </LinearLayout>

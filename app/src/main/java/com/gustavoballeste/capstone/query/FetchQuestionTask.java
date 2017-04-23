@@ -144,7 +144,7 @@ public class FetchQuestionTask  extends AsyncTask {
             if (inputStream == null) {
 
             }
-            reader = new BufferedReader(new InputStreamReader(inputStream));
+            reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8")); //or ISO-8859-1
 
             String line;
             while ((line = reader.readLine()) != null) {
