@@ -36,6 +36,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     public static final String[] QUESTION_COLUMNS = {
             QuestionContract.QuestionEntry._ID,
+            QuestionContract.QuestionEntry.COLUMN_QUESTION_NUMBER,
             QuestionContract.QuestionEntry.COLUMN_STATEMENT,
             QuestionContract.QuestionEntry.COLUMN_CATEGORY,
             QuestionContract.QuestionEntry.COLUMN_TYPE,
@@ -47,14 +48,15 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     };
 
     public static final int COL_ID = 0;
-    public static final int COL_STATEMENT = 1;
-    public static final int COL_CATEGORY = 2;
-    public static final int COL_TYPE = 3;
-    public static final int COL_DIFFICULTY = 4;
-    public static final int COL_CORRECT_ANSWER = 5;
-    public static final int COL_INCORRECT_ANSWER1 = 6;
-    public static final int COL_INCORRECT_ANSWER2 = 7;
-    public static final int COL_INCORRECT_ANSWER3 = 8;
+    public static final int COL_QUESTION_NUMBER = 1;
+    public static final int COL_STATEMENT = 2;
+    public static final int COL_CATEGORY = 3;
+    public static final int COL_TYPE = 4;
+    public static final int COL_DIFFICULTY = 5;
+    public static final int COL_CORRECT_ANSWER = 6;
+    public static final int COL_INCORRECT_ANSWER1 = 7;
+    public static final int COL_INCORRECT_ANSWER2 = 8;
+    public static final int COL_INCORRECT_ANSWER3 = 9;
 
     /**
      * When creating, retrieve this instance's number from its arguments.
@@ -91,9 +93,6 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        //Estes objetos estão na list_item_question.xml
-//        View countTv = view.findViewById(R.id.count);
-//        ((TextView)countTv).setText(mNum+"/10");
 
         // Watch for button clicks.
 //        Button button = (Button) view.findViewById(R.id.goto_next);

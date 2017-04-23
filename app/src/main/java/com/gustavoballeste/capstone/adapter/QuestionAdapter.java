@@ -7,24 +7,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.gustavoballeste.capstone.QuestionFragment;
 import com.gustavoballeste.capstone.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import static com.gustavoballeste.capstone.R.id.answer2;
 
 /**
  * Created by gustavoballeste on 18/04/17.
  */
 
 public class QuestionAdapter extends CursorAdapter {
-
 
     public QuestionAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
@@ -41,6 +38,11 @@ public class QuestionAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
+
+        //Estes objetos estão na list_item_question.xml
+        String questionNumber = cursor.getString(QuestionFragment.COL_QUESTION_NUMBER);
+        View countTv = view.findViewById(R.id.count);
+        ((TextView)countTv).setText(questionNumber + "/10");
 
         String statement = cursor.getString(QuestionFragment.COL_STATEMENT);
         TextView statementTextView = (TextView) view.findViewById(R.id.statement);
@@ -77,6 +79,14 @@ public class QuestionAdapter extends CursorAdapter {
             answer3TextView.setText(answersList.get(2));
             answer4TextView.setText(answersList.get(3));
         }
+
+        // Watch for button clicks.
+//        Button button = (Button) view.findViewById(R.id.goto_next);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                mQuestionView.showNext();
+//            }
+//        });
 
     }
 

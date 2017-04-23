@@ -18,6 +18,7 @@ public class QuestionContract {
 
     public static final class QuestionEntry implements BaseColumns {
         public static final String TABLE_NAME = "question";
+        public static final String COLUMN_QUESTION_NUMBER = "question_number"; // 1 to 10
         public static final String COLUMN_STATEMENT = "statement";
         public static final String COLUMN_CATEGORY = "category";
         public static final String COLUMN_TYPE = "type";

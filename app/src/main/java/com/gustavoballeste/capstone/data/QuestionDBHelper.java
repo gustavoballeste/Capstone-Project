@@ -22,6 +22,7 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
     final String SQL_CREATE_QUESTION_TABLE = "CREATE TABLE " + QuestionContract.QuestionEntry.TABLE_NAME + " (" +
             QuestionContract.QuestionEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            QuestionContract.QuestionEntry.COLUMN_QUESTION_NUMBER + " TEXT NOT NULL, " +
             QuestionContract.QuestionEntry.COLUMN_CATEGORY + " TEXT NOT NULL, " +
             QuestionContract.QuestionEntry.COLUMN_TYPE + " TEXT, " +
             QuestionContract.QuestionEntry.COLUMN_DIFFICULTY + " TEXT, " +

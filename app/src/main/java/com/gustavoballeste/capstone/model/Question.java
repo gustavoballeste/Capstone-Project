@@ -12,6 +12,7 @@ import com.gustavoballeste.capstone.QuestionFragment;
 
 public class Question implements Parcelable {
     private int id;
+    private String question_number;
     private String category;
     private String type;
     private String difficulty;
@@ -22,6 +23,7 @@ public class Question implements Parcelable {
     private String incorrectAnswer3;
 
     public int getId() { return id; }
+    public String getQuestionNumber() { return question_number; }
     public String getCategory() { return category; }
     public String getType() { return type; }
     public String getDifficulty() { return difficulty; }
@@ -31,8 +33,9 @@ public class Question implements Parcelable {
     public String getIncorrectAnswer2() { return incorrectAnswer2; }
     public String getIncorrectAnswer3() { return incorrectAnswer3; }
 
-    public Question (int id, String category, String type, String difficulty, String statement, String correctAnswer, String incorrectAnswer1, String incorrectAnswer2, String incorrectAnswer3) {
+    public Question (int id, String questionNumber, String category, String type, String difficulty, String statement, String correctAnswer, String incorrectAnswer1, String incorrectAnswer2, String incorrectAnswer3) {
         this.id = id;
+        this.question_number = questionNumber;
         this.category = category;
         this.type = type;
         this.difficulty = difficulty;
@@ -46,15 +49,16 @@ public class Question implements Parcelable {
     public Question(Cursor cursor){
         String id = cursor.getString(QuestionFragment.COL_ID);
 
-        this.id = cursor.getInt(cursor.getInt(QuestionFragment.COL_ID));
-        this.category = cursor.getString(cursor.getInt(QuestionFragment.COL_CATEGORY));
-        this.type = cursor.getString(cursor.getInt(QuestionFragment.COL_TYPE));
-        this.difficulty = cursor.getString(cursor.getInt(QuestionFragment.COL_DIFFICULTY));
-        this.statement = cursor.getString(cursor.getInt(QuestionFragment.COL_STATEMENT));
-        this.correctAnswer = cursor.getString(cursor.getInt(QuestionFragment.COL_CORRECT_ANSWER));
-        this.incorrectAnswer1 = cursor.getString(cursor.getInt(QuestionFragment.COL_INCORRECT_ANSWER1));
-        this.incorrectAnswer2 = cursor.getString(cursor.getInt(QuestionFragment.COL_INCORRECT_ANSWER2));
-        this.incorrectAnswer3 = cursor.getString(cursor.getInt(QuestionFragment.COL_INCORRECT_ANSWER3));
+        this.id = cursor.getInt(QuestionFragment.COL_ID);
+        this.question_number = cursor.getString(QuestionFragment.COL_QUESTION_NUMBER);
+        this.category = cursor.getString(QuestionFragment.COL_CATEGORY);
+        this.type = cursor.getString(QuestionFragment.COL_TYPE);
+        this.difficulty = cursor.getString(QuestionFragment.COL_DIFFICULTY);
+        this.statement = cursor.getString(QuestionFragment.COL_STATEMENT);
+        this.correctAnswer = cursor.getString(QuestionFragment.COL_CORRECT_ANSWER);
+        this.incorrectAnswer1 = cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1);
+        this.incorrectAnswer2 = cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER2);
+        this.incorrectAnswer3 = cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER3);
     }
 
     public static final Creator<Question> CREATOR = new Creator<Question>() {
@@ -77,6 +81,7 @@ public class Question implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
+        dest.writeString(question_number);
         dest.writeString(category);
         dest.writeString(type);
         dest.writeString(difficulty);
@@ -89,6 +94,7 @@ public class Question implements Parcelable {
 
     private Question(Parcel in) {
         id = in.readInt();
+        question_number = in.readString();
         category = in.readString();
         type = in.readString();
         difficulty = in.readString();

@@ -43,7 +43,6 @@ public class FetchQuestionTask  extends AsyncTask {
 
         final String QUESTIONDB_RESULTS = "results";
         JSONArray questionsArray = questionsJson.getJSONArray((QUESTIONDB_RESULTS));
-
         final String question_category = "category";
         final String question_type = "type";
         final String question_difficulty = "difficulty";
@@ -83,6 +82,7 @@ public class FetchQuestionTask  extends AsyncTask {
                 ContentValues contentValues = new ContentValues();
 
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_CATEGORY, category);
+                contentValues.put(QuestionContract.QuestionEntry.COLUMN_QUESTION_NUMBER, (i+1)); // Can be 1 to 10
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_TYPE, type);
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_DIFFICULTY, difficulty);
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_STATEMENT, statement);
