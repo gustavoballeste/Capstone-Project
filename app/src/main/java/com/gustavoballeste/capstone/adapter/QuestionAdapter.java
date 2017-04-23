@@ -12,6 +12,13 @@ import android.widget.TextView;
 import com.gustavoballeste.capstone.QuestionFragment;
 import com.gustavoballeste.capstone.R;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import static com.gustavoballeste.capstone.R.id.answer2;
+
 /**
  * Created by gustavoballeste on 18/04/17.
  */
@@ -39,21 +46,23 @@ public class QuestionAdapter extends CursorAdapter {
         TextView statementTextView = (TextView) view.findViewById(R.id.statement);
         statementTextView.setText(statement);
 
-        String answer1 = cursor.getString(QuestionFragment.COL_CORRECT_ANSWER);
+        List<String> answersList = new ArrayList<>();
+        answersList.add(cursor.getString(QuestionFragment.COL_CORRECT_ANSWER));
+        answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1));
+        answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER2));
+        answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER3));
+
         TextView answer1TextView = (TextView) view.findViewById(R.id.answer1);
-        answer1TextView.setText(answer1);
-
-        String answer2 = cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1);
         TextView answer2TextView = (TextView) view.findViewById(R.id.answer2);
-        answer2TextView.setText(answer2);
-
-        String answer3 = cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER2);
         TextView answer3TextView = (TextView) view.findViewById(R.id.answer3);
-        answer3TextView.setText(answer3);
-
-        String answer4 = cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER3);
         TextView answer4TextView = (TextView) view.findViewById(R.id.answer4);
-        answer4TextView.setText(answer4);
+
+        Collections.shuffle(answersList);
+        answer1TextView.setText(answersList.get(0));
+        answer2TextView.setText(answersList.get(1));
+        answer3TextView.setText(answersList.get(2));
+        answer4TextView.setText(answersList.get(3));
+
     }
 
 }
