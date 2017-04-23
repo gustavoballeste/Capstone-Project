@@ -47,21 +47,36 @@ public class QuestionAdapter extends CursorAdapter {
         statementTextView.setText(statement);
 
         List<String> answersList = new ArrayList<>();
-        answersList.add(cursor.getString(QuestionFragment.COL_CORRECT_ANSWER));
-        answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1));
-        answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER2));
-        answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER3));
+        String type = cursor.getString(QuestionFragment.COL_TYPE);
+        if (type.equals("boolean")) {
+            answersList.add(cursor.getString(QuestionFragment.COL_CORRECT_ANSWER));
+            answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1));
+            TextView answer1TextView = (TextView) view.findViewById(R.id.answer1);
+            TextView answer2TextView = (TextView) view.findViewById(R.id.answer2);
+            answer1TextView.setText(answersList.get(0));
+            answer2TextView.setText(answersList.get(1));
+            TextView answer3 = (TextView) view.findViewById(R.id.answer3);
+            TextView answer4 = (TextView) view.findViewById(R.id.answer4);
+            answer3.setVisibility(View.GONE);
+            answer4.setVisibility(View.GONE);
+        }
+        else {
+            answersList.add(cursor.getString(QuestionFragment.COL_CORRECT_ANSWER));
+            answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1));
+            answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER2));
+            answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER3));
 
-        TextView answer1TextView = (TextView) view.findViewById(R.id.answer1);
-        TextView answer2TextView = (TextView) view.findViewById(R.id.answer2);
-        TextView answer3TextView = (TextView) view.findViewById(R.id.answer3);
-        TextView answer4TextView = (TextView) view.findViewById(R.id.answer4);
+            TextView answer1TextView = (TextView) view.findViewById(R.id.answer1);
+            TextView answer2TextView = (TextView) view.findViewById(R.id.answer2);
+            TextView answer3TextView = (TextView) view.findViewById(R.id.answer3);
+            TextView answer4TextView = (TextView) view.findViewById(R.id.answer4);
 
-        Collections.shuffle(answersList);
-        answer1TextView.setText(answersList.get(0));
-        answer2TextView.setText(answersList.get(1));
-        answer3TextView.setText(answersList.get(2));
-        answer4TextView.setText(answersList.get(3));
+            Collections.shuffle(answersList);
+            answer1TextView.setText(answersList.get(0));
+            answer2TextView.setText(answersList.get(1));
+            answer3TextView.setText(answersList.get(2));
+            answer4TextView.setText(answersList.get(3));
+        }
 
     }
 
