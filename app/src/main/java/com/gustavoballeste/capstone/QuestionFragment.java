@@ -13,9 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterViewAnimator;
+import android.widget.AdapterViewFlipper;
 import android.widget.Button;
-import android.widget.TextView;
+
 
 import com.gustavoballeste.capstone.adapter.QuestionAdapter;
 import com.gustavoballeste.capstone.data.QuestionContract;
@@ -30,7 +30,7 @@ import com.gustavoballeste.capstone.query.FetchQuestionTask;
 public class QuestionFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     int mNum;
     private QuestionAdapter mAdapter;
-    AdapterViewAnimator mQuestionView;
+    AdapterViewFlipper mQuestionView;
 
     private static final int QUESTION_LOADER = 0;
 
@@ -82,28 +82,45 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         mAdapter = new QuestionAdapter(getActivity(), null, 0);
 
         View view = inflater.inflate(R.layout.question_fragment, container, false);
-        mQuestionView = (AdapterViewAnimator) view.findViewById(R.id.question_view_flipper);
+        mQuestionView = (AdapterViewFlipper) view.findViewById(R.id.question_view_flipper);
+
         mQuestionView.setAdapter(mAdapter);
-        mQuestionView.setSelection(0); //Definir aqui a posição do adapter que será apresentada
+        mQuestionView.setSelection(1); //Definir aqui a posição do adapter que será apresentada
         setQuizViewAnimations();
+
+        //Debug Gustavo
+        final int count = mQuestionView.getAdapter().getCount();
+        Log.d("LOG_GUSTAVO Count", count+" registros no adapter");
 
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
 
+        //Watch for button click to next question.
+        Button button = (Button) view.findViewById(R.id.goto_next);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mQuestionView.showNext();
+            }
+        });
 
-        // Watch for button clicks.
-//        Button button = (Button) view.findViewById(R.id.goto_next);
-//        button.setOnClickListener(new View.OnClickListener() {
+//        //Watch for answer selected.
+//        TextView textView1 = (TextView) view.findViewById(R.id.answer1);
+//        textView1.setOnClickListener(new View.OnClickListener() {
+//
 //            public void onClick(View v) {
-//                mQuestionView.showNext();
+//                String answerSelected = v.toString();
+//                 questionCheck(answerSelected);
 //            }
 //        });
 
         super.onViewCreated(view, savedInstanceState);
     }
+
+//    private void questionCheck(String answerSelecter) {
+//    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setQuizViewAnimations() {
@@ -170,7 +187,15 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
+
+        final int count1 = mQuestionView.getAdapter().getCount();
+        Log.d(new Object(){}.getClass().getEnclosingMethod().getName(), count1+" registros no adapter");
+
         mAdapter.swapCursor(data);
+
+        final int count2 = mQuestionView.getAdapter().getCount();
+        Log.d(new Object(){}.getClass().getEnclosingMethod().getName(), count2+" registros no adapter");
+
     }
 
     @Override

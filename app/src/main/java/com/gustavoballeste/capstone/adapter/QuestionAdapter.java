@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterViewAnimator;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -23,8 +24,11 @@ import java.util.List;
 
 public class QuestionAdapter extends CursorAdapter {
 
+    private final Context mContext;
+
     public QuestionAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
+        mContext = context;
     }
 
     @Override
@@ -43,6 +47,14 @@ public class QuestionAdapter extends CursorAdapter {
         String questionNumber = cursor.getString(QuestionFragment.COL_QUESTION_NUMBER);
         View countTv = view.findViewById(R.id.count);
         ((TextView)countTv).setText(questionNumber + "/10");
+
+        // Watch for button clicks.
+//        Button button = (Button) view.findViewById(R.id.goto_next);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                mQuestionView.showNext();
+//            }
+//        });
 
         String statement = cursor.getString(QuestionFragment.COL_STATEMENT);
         TextView statementTextView = (TextView) view.findViewById(R.id.statement);
@@ -79,14 +91,6 @@ public class QuestionAdapter extends CursorAdapter {
             answer3TextView.setText(answersList.get(2));
             answer4TextView.setText(answersList.get(3));
         }
-
-        // Watch for button clicks.
-//        Button button = (Button) view.findViewById(R.id.goto_next);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                mQuestionView.showNext();
-//            }
-//        });
 
     }
 

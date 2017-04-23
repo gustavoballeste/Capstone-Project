@@ -69,10 +69,9 @@ public class FetchQuestionTask  extends AsyncTask {
                 String incorrect_answer3 = null;
 
                 JSONArray incorrectQuestionsArray = questionJSONObject.getJSONArray((question_incorrect_answers));
-                Log.d("incorrectQuestionsArray", incorrectQuestionsArray.toString());
+
 
                 incorrect_answer1 = incorrectQuestionsArray.get(0).toString();
-                Log.d("incorrect_answer1", incorrect_answer1);
 
                 if (type.equals("multiple")) {
                     incorrect_answer2 = incorrectQuestionsArray.get(1).toString();
@@ -92,6 +91,10 @@ public class FetchQuestionTask  extends AsyncTask {
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER3, incorrect_answer3);
 
                 cVVector.add(contentValues);
+
+                int questionNumber = i+1;
+                Log.d("Content Values", "category:" + category + " | question_number:" + questionNumber + " | type:" + type + " | difficulty:" + difficulty + " | statement:" + statement + " | correct_answer:" + correct_answer + " | incorrect_answer1:" + incorrect_answer1 + " | incorrect_answer2:" + incorrect_answer2 + " | incorrect_answer2:" + incorrect_answer2);
+
             }
             int inserted = 0;
 
