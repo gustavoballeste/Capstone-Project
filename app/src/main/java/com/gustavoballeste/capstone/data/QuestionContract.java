@@ -27,6 +27,7 @@ public class QuestionContract {
         public static final String COLUMN_INCORRECT_ANSWER1 = "incorrect_answer_1";
         public static final String COLUMN_INCORRECT_ANSWER2 = "incorrect_answer_2";
         public static final String COLUMN_INCORRECT_ANSWER3 = "incorrect_answer_3";
+        public static final String COLUMN_RESULT = "result";
 
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(QUESTION_PATH).build();

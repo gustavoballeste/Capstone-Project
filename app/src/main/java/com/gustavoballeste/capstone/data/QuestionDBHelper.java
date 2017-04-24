@@ -30,7 +30,8 @@ public class QuestionDBHelper extends SQLiteOpenHelper {
             QuestionContract.QuestionEntry.COLUMN_CORRECT_ANSWER + " TEXT, " +
             QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER1 + " TEXT, " +
             QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER2 + " TEXT, " +
-            QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER3 + " TEXT)";
+            QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER3 + " TEXT, " +
+            QuestionContract.QuestionEntry.COLUMN_RESULT + " TEXT)";
 
         db.execSQL(SQL_CREATE_QUESTION_TABLE);
     }

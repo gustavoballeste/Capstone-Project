@@ -28,6 +28,7 @@ import com.gustavoballeste.capstone.query.FetchQuestionTask;
  */
 
 public class QuestionFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+
     int mNum;
     int mCategoryCode;
 
@@ -47,6 +48,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
             QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER1,
             QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER2,
             QuestionContract.QuestionEntry.COLUMN_INCORRECT_ANSWER3,
+            QuestionContract.QuestionEntry.COLUMN_RESULT,
     };
 
     public static final int COL_ID = 0;
@@ -59,6 +61,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     public static final int COL_INCORRECT_ANSWER1 = 7;
     public static final int COL_INCORRECT_ANSWER2 = 8;
     public static final int COL_INCORRECT_ANSWER3 = 9;
+    public static final int COL_RESULT = 10;
 
     /**
      * When creating, retrieve this instance's number from its arguments.
@@ -90,7 +93,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
         mQuestionView.setAdapter(mAdapter);
         mQuestionView.setSelection(1); //Definir aqui a posição do adapter que será apresentada
-        setQuizViewAnimations();
+//        setQuizViewAnimations();
 
         //Debug Gustavo
         final int count = mQuestionView.getAdapter().getCount();

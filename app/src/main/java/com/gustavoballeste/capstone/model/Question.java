@@ -21,6 +21,7 @@ public class Question implements Parcelable {
     private String incorrectAnswer1;
     private String incorrectAnswer2;
     private String incorrectAnswer3;
+    private String result;
 
     public int getId() { return id; }
     public String getQuestionNumber() { return question_number; }
@@ -32,8 +33,9 @@ public class Question implements Parcelable {
     public String getIncorrectAnswer1() { return incorrectAnswer1; }
     public String getIncorrectAnswer2() { return incorrectAnswer2; }
     public String getIncorrectAnswer3() { return incorrectAnswer3; }
+    public String getResult() {return result;}
 
-    public Question (int id, String questionNumber, String category, String type, String difficulty, String statement, String correctAnswer, String incorrectAnswer1, String incorrectAnswer2, String incorrectAnswer3) {
+    public Question (int id, String questionNumber, String category, String type, String difficulty, String statement, String correctAnswer, String incorrectAnswer1, String incorrectAnswer2, String incorrectAnswer3, String result) {
         this.id = id;
         this.question_number = questionNumber;
         this.category = category;
@@ -44,6 +46,7 @@ public class Question implements Parcelable {
         this.incorrectAnswer1 = incorrectAnswer1;
         this.incorrectAnswer2 = incorrectAnswer2;
         this.incorrectAnswer3 = incorrectAnswer3;
+        this.result = result;
     }
 
     public Question(Cursor cursor){
@@ -59,6 +62,7 @@ public class Question implements Parcelable {
         this.incorrectAnswer1 = cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1);
         this.incorrectAnswer2 = cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER2);
         this.incorrectAnswer3 = cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER3);
+        this.result = cursor.getString(QuestionFragment.COL_RESULT);
     }
 
     public static final Creator<Question> CREATOR = new Creator<Question>() {
@@ -90,6 +94,7 @@ public class Question implements Parcelable {
         dest.writeString(incorrectAnswer1);
         dest.writeString(incorrectAnswer2);
         dest.writeString(incorrectAnswer3);
+        dest.writeString(result);
     }
 
     private Question(Parcel in) {
@@ -103,5 +108,6 @@ public class Question implements Parcelable {
         incorrectAnswer1 = in.readString();
         incorrectAnswer2 = in.readString();
         incorrectAnswer3 = in.readString();
+        result = in.readString();
     }
 }
