@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CursorAdapter;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by gustavoballeste on 18/04/17.
  */
@@ -25,6 +28,14 @@ import java.util.List;
 public class QuestionAdapter extends CursorAdapter {
 
     private final Context mContext;
+
+    TextView mCountView;
+    TextView mStatementView;
+    TextView mAnswer1View;
+    TextView mAnswer2View;
+    TextView mAnswer3View;
+    TextView mAnswer4View;
+    String mType;
 
     public QuestionAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
@@ -37,6 +48,7 @@ public class QuestionAdapter extends CursorAdapter {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         View view = LayoutInflater.from(context).inflate(R.layout.list_item_question, parent, false);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -44,61 +56,62 @@ public class QuestionAdapter extends CursorAdapter {
     public void bindView(View view, final Context context, Cursor cursor) {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
-        //Estes objetos estão na list_item_question.xml
-
-//        loadViewFromCursor();
         Question question = new Question(cursor);
-        question.getQuestionNumber();
+        mCountView = (TextView) view.findViewById(R.id.count);
+        mCountView.setText(question.getQuestionNumber());
 
-        String questionNumber = cursor.getString(QuestionFragment.COL_QUESTION_NUMBER);
-        View countTv = view.findViewById(R.id.count);
-        ((TextView)countTv).setText(questionNumber + "/10");
+        mStatementView = (TextView) view.findViewById(R.id.statement);
+        mStatementView.setText(question.getStatement());
 
-
-        setListener(view, R.id.answer1);
-        setListener(view, R.id.answer2);
-
-        String statement = question.getStatement();
-
-        TextView statementTextView = (TextView) view.findViewById(R.id.statement);
-        statementTextView.setText(statement);
-
-        List<String> answersList = new ArrayList<>();
-        String type = cursor.getString(QuestionFragment.COL_TYPE);
-        if (type.equals("boolean")) {
-            answersList.add(cursor.getString(QuestionFragment.COL_CORRECT_ANSWER));
-            answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1));
-            TextView answer1TextView = (TextView) view.findViewById(R.id.answer1);
-            TextView answer2TextView = (TextView) view.findViewById(R.id.answer2);
-            answer1TextView.setText(answersList.get(0));
-            answer2TextView.setText(answersList.get(1));
-            TextView answer3 = (TextView) view.findViewById(R.id.answer3);
-            TextView answer4 = (TextView) view.findViewById(R.id.answer4);
-            answer3.setVisibility(View.GONE);
-            answer4.setVisibility(View.GONE);
+        mType = question.getType();
+        if (mType.equals(mContext.getString(R.string.boolean_type))) {
+            loadBooleanTypeView(cursor, view);
         }
         else {
-            answersList.add(cursor.getString(QuestionFragment.COL_CORRECT_ANSWER));
-            answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1));
-            answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER2));
-            answersList.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER3));
-
-            TextView answer1TextView = (TextView) view.findViewById(R.id.answer1);
-            TextView answer2TextView = (TextView) view.findViewById(R.id.answer2);
-            TextView answer3TextView = (TextView) view.findViewById(R.id.answer3);
-            TextView answer4TextView = (TextView) view.findViewById(R.id.answer4);
-
-            Collections.shuffle(answersList);
-            answer1TextView.setText(answersList.get(0));
-            answer2TextView.setText(answersList.get(1));
-            answer3TextView.setText(answersList.get(2));
-            answer4TextView.setText(answersList.get(3));
+            loadMultipleTypeView(cursor, view);
         }
-
 
     }
 
-    private void loadViewFromCursor() {
+    private void loadBooleanTypeView(Cursor cursor, View rootView) {
+        List<String> booleanAnswers = new ArrayList<>();
+        booleanAnswers.add(cursor.getString(QuestionFragment.COL_CORRECT_ANSWER));
+        booleanAnswers.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1));
+        mAnswer1View = (TextView) rootView.findViewById(R.id.answer1);
+        mAnswer1View.setText(booleanAnswers.get(0));
+        mAnswer2View = (TextView) rootView.findViewById(R.id.answer2);
+        mAnswer2View.setText(booleanAnswers.get(1));
+        setListener(rootView, R.id.answer1);
+        setListener(rootView, R.id.answer2);
+
+        //Hide the cardViews used just for type 'multiple'
+        CardView cardView3 = (CardView)rootView.findViewById(R.id.answer3_card_view);
+        cardView3.setVisibility(View.GONE);
+        CardView cardView4 = (CardView)rootView.findViewById(R.id.answer4_card_view);
+        cardView4.setVisibility(View.GONE);
+
+    }
+
+    private void loadMultipleTypeView(Cursor cursor, View rootView) {
+        List<String> multipleAnswers = new ArrayList<>();
+        multipleAnswers.add(cursor.getString(QuestionFragment.COL_CORRECT_ANSWER));
+        multipleAnswers.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1));
+        multipleAnswers.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER2));
+        multipleAnswers.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER3));
+        Collections.shuffle(multipleAnswers);
+        mAnswer1View = (TextView) rootView.findViewById(R.id.answer1);
+        mAnswer1View.setText(multipleAnswers.get(0));
+        mAnswer2View = (TextView) rootView.findViewById(R.id.answer2);
+        mAnswer2View.setText(multipleAnswers.get(1));
+        mAnswer3View = (TextView) rootView.findViewById(R.id.answer3);
+        mAnswer3View.setText(multipleAnswers.get(2));
+        mAnswer4View = (TextView) rootView.findViewById(R.id.answer4);
+        mAnswer4View.setText(multipleAnswers.get(3));
+        setListener(rootView, R.id.answer1);
+        setListener(rootView, R.id.answer2);
+        setListener(rootView, R.id.answer3);
+        setListener(rootView, R.id.answer4);
+
     }
 
     private void setListener(View rootView, int resourceId) {
@@ -106,7 +119,6 @@ public class QuestionAdapter extends CursorAdapter {
         final TextView textView = (TextView) rootView.findViewById(resourceId);
         final View view = rootView;
         textView.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 setTextViewBackgroundColor(textView, view);
             }
@@ -118,19 +130,21 @@ public class QuestionAdapter extends CursorAdapter {
         int textViewId = textView.getId();
         int answer1Id = R.id.answer1;
         int answer2Id = R.id.answer2;
-//        int answer3Id = R.id.answer3;
-//        int answer4Id = R.id.answer4;
-
 
         boolean isSelectedAnswer1 = (answer1Id == textViewId);
         boolean isSelectedAnswer2 = (answer2Id == textViewId);
-//        boolean isSelectedanswer3 = (R.id.answer3 == textViewId);
-//        boolean isSelectedanswer4 = (R.id.answer4 == textViewId);
 
         setAnswersBackgoundColor(answer1Id, isSelectedAnswer1, rootView);
         setAnswersBackgoundColor(answer2Id, isSelectedAnswer2, rootView);
-//        setAnswersBackgoundColor(textView, answer3);
-//        setAnswersBackgoundColor(textView, answer4);
+
+        if (mType.equals(mContext.getString(R.string.multiple_type))) {
+            int answer3Id = R.id.answer3;
+            int answer4Id = R.id.answer4;
+            boolean isSelectedAnswer3 = (answer3Id == textViewId);
+            boolean isSelectedAnswer4 = (answer4Id == textViewId);
+            setAnswersBackgoundColor(answer3Id, isSelectedAnswer3, rootView);
+            setAnswersBackgoundColor(answer4Id, isSelectedAnswer4, rootView);
+        }
     }
 
     private void setAnswersBackgoundColor(int id, boolean selected, View view) {

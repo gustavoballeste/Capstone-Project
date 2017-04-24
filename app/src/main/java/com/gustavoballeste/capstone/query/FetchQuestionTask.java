@@ -81,7 +81,7 @@ public class FetchQuestionTask  extends AsyncTask {
                 ContentValues contentValues = new ContentValues();
 
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_CATEGORY, category);
-                contentValues.put(QuestionContract.QuestionEntry.COLUMN_QUESTION_NUMBER, (i+1)); // Can be 1 to 10
+                contentValues.put(QuestionContract.QuestionEntry.COLUMN_QUESTION_NUMBER, (i+1+"/10")); // Can be 1 to 10
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_TYPE, type);
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_DIFFICULTY, difficulty);
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_STATEMENT, statement);
