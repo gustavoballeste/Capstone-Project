@@ -5,4 +5,6 @@
     <color name="colorPrimaryLight">#A5DEF1</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="answer_selected_color">#A5DEF1</color>
+    <color name="answer_unselected_color">#ffffff</color>
 </resources>

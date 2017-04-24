@@ -2,13 +2,12 @@ package com.gustavoballeste.capstone.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterViewAnimator;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.gustavoballeste.capstone.QuestionFragment;
@@ -34,6 +33,7 @@ public class QuestionAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
+
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         View view = LayoutInflater.from(context).inflate(R.layout.list_item_question, parent, false);
@@ -41,31 +41,25 @@ public class QuestionAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, Cursor cursor) {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         //Estes objetos estão na list_item_question.xml
 
+//        loadViewFromCursor();
         Question question = new Question(cursor);
         question.getQuestionNumber();
-
 
         String questionNumber = cursor.getString(QuestionFragment.COL_QUESTION_NUMBER);
         View countTv = view.findViewById(R.id.count);
         ((TextView)countTv).setText(questionNumber + "/10");
 
-        //Watch for answer selected. (Criar esse evento para todos os TextViews)
-        final TextView textView1 = (TextView) view.findViewById(R.id.answer1);
-        textView1.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
-                String answerSelected = (String)textView1.getText();
-                questionCheck(answerSelected);
-                Log.d("Debug Gustavo", answerSelected);
-            }
-        });
+        setListener(view, R.id.answer1);
+        setListener(view, R.id.answer2);
 
-        String statement = cursor.getString(QuestionFragment.COL_STATEMENT);
+        String statement = question.getStatement();
+
         TextView statementTextView = (TextView) view.findViewById(R.id.statement);
         statementTextView.setText(statement);
 
@@ -103,12 +97,51 @@ public class QuestionAdapter extends CursorAdapter {
 
 
     }
-    private void questionCheck(String answerSelected) {
+
+    private void loadViewFromCursor() {
+    }
+
+    private void setListener(View rootView, int resourceId) {
+
+        final TextView textView = (TextView) rootView.findViewById(resourceId);
+        final View view = rootView;
+        textView.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                setTextViewBackgroundColor(textView, view);
+            }
+        });
 
     }
 
-    private class ViewHolder {
+    private void setTextViewBackgroundColor(TextView textView, View rootView) {
+        int textViewId = textView.getId();
+        int answer1Id = R.id.answer1;
+        int answer2Id = R.id.answer2;
+//        int answer3Id = R.id.answer3;
+//        int answer4Id = R.id.answer4;
 
+
+        boolean isSelectedAnswer1 = (answer1Id == textViewId);
+        boolean isSelectedAnswer2 = (answer2Id == textViewId);
+//        boolean isSelectedanswer3 = (R.id.answer3 == textViewId);
+//        boolean isSelectedanswer4 = (R.id.answer4 == textViewId);
+
+        setAnswersBackgoundColor(answer1Id, isSelectedAnswer1, rootView);
+        setAnswersBackgoundColor(answer2Id, isSelectedAnswer2, rootView);
+//        setAnswersBackgoundColor(textView, answer3);
+//        setAnswersBackgoundColor(textView, answer4);
+    }
+
+    private void setAnswersBackgoundColor(int id, boolean selected, View view) {
+
+        TextView tv = (TextView)view.findViewById(id);
+        if (selected) {
+            tv.setBackgroundColor(ContextCompat.getColor(mContext, R.color.answer_selected_color));
+        }
+        else {
+            tv.setBackgroundColor(ContextCompat.getColor(mContext, R.color.answer_unselected_color));
+        }
     }
 
 

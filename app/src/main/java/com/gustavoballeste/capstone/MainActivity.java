@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, QuestionActivity.class)
                         .putExtra("category", category)
-                        .putExtra("position", getCategoryId(position));
+                        .putExtra("category_code", getCategoryId(position));
                 startActivity(intent);
             }
         });

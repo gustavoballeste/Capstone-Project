@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import com.gustavoballeste.capstone.adapter.QuestionAdapter;
@@ -22,6 +23,8 @@ import com.gustavoballeste.capstone.data.QuestionContract;
 import com.gustavoballeste.capstone.helper.ApiLevelHelper;
 import com.gustavoballeste.capstone.helper.Utility;
 import com.gustavoballeste.capstone.query.FetchQuestionTask;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by gustavoballeste on 18/04/17.
@@ -72,8 +75,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
         super.onCreate(savedInstanceState);
         mNum = getArguments() != null ? getArguments().getInt("num")+1 : 1;
-        mCategoryCode = getActivity().getIntent().getExtras().getInt("position");
-        String cat = getActivity().getIntent().getExtras().getString("category");
+        mCategoryCode = getActivity().getIntent().getExtras().getInt("category_code");
 
     }
 
@@ -93,7 +95,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
         mQuestionView.setAdapter(mAdapter);
         mQuestionView.setSelection(1); //Definir aqui a posição do adapter que será apresentada
-//        setQuizViewAnimations();
+        setQuizViewAnimations();
 
         //Debug Gustavo
         final int count = mQuestionView.getAdapter().getCount();
@@ -113,22 +115,8 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
             }
         });
 
-//        //Watch for answer selected.
-//        TextView textView1 = (TextView) view.findViewById(R.id.answer1);
-//        textView1.setOnClickListener(new View.OnClickListener() {
-//
-//            public void onClick(View v) {
-//                String answerSelected = v.toString();
-//                 questionCheck(answerSelected);
-//            }
-//        });
-
         super.onViewCreated(view, savedInstanceState);
     }
-
-//    private void questionCheck(String answerSelected) {
-//
-//    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setQuizViewAnimations() {
