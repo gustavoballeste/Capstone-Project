@@ -28,13 +28,16 @@ public class MainActivity extends AppCompatActivity {
                 TextView tv = (TextView) v.findViewById(R.id.category_description_text_view);
                 String category = tv.getText().toString();
 
-                Log.e("Category","Category = " + category);
-                Log.e("Position","Position = " + position);
-
                 Intent intent = new Intent(MainActivity.this, QuestionActivity.class)
-                        .putExtra("category", category);
+                        .putExtra("category", category)
+                        .putExtra("position", getCategoryId(position));
                 startActivity(intent);
             }
         });
+    }
+
+    //Return the category ID according to opentdb.org
+    private int getCategoryId(int position) {
+        return position + 9; //9 is the inicial category code
     }
 }

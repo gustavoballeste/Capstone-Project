@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.gustavoballeste.capstone.QuestionFragment;
 import com.gustavoballeste.capstone.R;
+import com.gustavoballeste.capstone.model.Question;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,17 +45,25 @@ public class QuestionAdapter extends CursorAdapter {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         //Estes objetos estão na list_item_question.xml
+
+        Question question = new Question(cursor);
+        question.getQuestionNumber();
+
+
         String questionNumber = cursor.getString(QuestionFragment.COL_QUESTION_NUMBER);
         View countTv = view.findViewById(R.id.count);
         ((TextView)countTv).setText(questionNumber + "/10");
 
-        // Watch for button clicks.
-//        Button button = (Button) view.findViewById(R.id.goto_next);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                mQuestionView.showNext();
-//            }
-//        });
+        //Watch for answer selected. (Criar esse evento para todos os TextViews)
+        final TextView textView1 = (TextView) view.findViewById(R.id.answer1);
+        textView1.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                String answerSelected = (String)textView1.getText();
+                questionCheck(answerSelected);
+                Log.d("Debug Gustavo", answerSelected);
+            }
+        });
 
         String statement = cursor.getString(QuestionFragment.COL_STATEMENT);
         TextView statementTextView = (TextView) view.findViewById(R.id.statement);
@@ -92,6 +101,15 @@ public class QuestionAdapter extends CursorAdapter {
             answer4TextView.setText(answersList.get(3));
         }
 
+
     }
+    private void questionCheck(String answerSelected) {
+
+    }
+
+    private class ViewHolder {
+
+    }
+
 
 }

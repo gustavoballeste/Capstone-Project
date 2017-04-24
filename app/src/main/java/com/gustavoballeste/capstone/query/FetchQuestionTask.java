@@ -114,7 +114,8 @@ public class FetchQuestionTask  extends AsyncTask {
     @Override
     protected Void doInBackground(Object[] objects) {
 
-        String sortOrder = objects[0].toString();
+        String categoryCode = objects[0].toString();
+
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
@@ -123,13 +124,11 @@ public class FetchQuestionTask  extends AsyncTask {
         try{
 
             final String baseUrl = "https://opentdb.com/api.php?amount=10";
-            //Incluir aqui o parâmetro categoria
 
-//            final String SORT_PARAM = "sort_by";
-//            final String API_KEY = "api_key";
+           final String SORT_PARAM = "category";
 
             Uri queryUri = Uri.parse(baseUrl).buildUpon()
-                    .appendEncodedPath(sortOrder)
+                    .appendQueryParameter(SORT_PARAM, categoryCode)
                     .build();
 
             URL url = new URL(queryUri.toString());
@@ -147,7 +146,8 @@ public class FetchQuestionTask  extends AsyncTask {
             if (inputStream == null) {
 
             }
-            reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8")); //or ISO-8859-1
+            //Testar tipos de padões diferentes. (UTF-8 or ISO-8859-1) Ainda está com problema
+            reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
             String line;
             while ((line = reader.readLine()) != null) {

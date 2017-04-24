@@ -29,6 +29,8 @@ import com.gustavoballeste.capstone.query.FetchQuestionTask;
 
 public class QuestionFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     int mNum;
+    int mCategoryCode;
+
     private QuestionAdapter mAdapter;
     AdapterViewFlipper mQuestionView;
 
@@ -67,6 +69,8 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
         super.onCreate(savedInstanceState);
         mNum = getArguments() != null ? getArguments().getInt("num")+1 : 1;
+        mCategoryCode = getActivity().getIntent().getExtras().getInt("position");
+        String cat = getActivity().getIntent().getExtras().getString("category");
 
     }
 
@@ -119,7 +123,8 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         super.onViewCreated(view, savedInstanceState);
     }
 
-//    private void questionCheck(String answerSelecter) {
+//    private void questionCheck(String answerSelected) {
+//
 //    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -179,7 +184,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
         FetchQuestionTask moviesTask = new FetchQuestionTask(getActivity(), this);
 
-        moviesTask.execute(12);//passar a categoria
+        moviesTask.execute(mCategoryCode);//passar a categoria
 
         getLoaderManager().restartLoader(QUESTION_LOADER, null, this);
     }
