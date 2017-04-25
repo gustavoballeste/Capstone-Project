@@ -111,7 +111,7 @@ public class QuestionProvider extends ContentProvider {
             returnUri = QuestionContract.QuestionEntry.buildQuestionUri(_id);
         }
         else {
-            throw new android.database.SQLException("Failed to insert row into MOVIE TABLE: " + uri);
+            throw new android.database.SQLException("Failed to insert row into QUESTION TABLE: " + uri);
         }
 
         getContext().getContentResolver().notifyChange(uri, null);

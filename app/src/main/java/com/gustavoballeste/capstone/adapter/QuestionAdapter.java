@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.gustavoballeste.capstone.QuestionFragment;
 import com.gustavoballeste.capstone.R;
 import com.gustavoballeste.capstone.model.Question;
@@ -37,6 +36,8 @@ public class QuestionAdapter extends CursorAdapter {
     TextView mAnswer3View;
     TextView mAnswer4View;
     String mType;
+
+    static String mLastAnswerSelected;
 
     public QuestionAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
@@ -118,17 +119,18 @@ public class QuestionAdapter extends CursorAdapter {
     private void setListener(final View rootView, int resourceId) {
 
         final TextView textView = (TextView) rootView.findViewById(resourceId);
+
         final View view = rootView;
         final View buttonRootView = QuestionFragment.mView;
         textView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //Não está funcionando
                 Button button = (Button)buttonRootView.findViewById(R.id.goto_next);
                 button.setVisibility(View.VISIBLE);
                 setTextViewBackgroundColor(textView, view);
+                mLastAnswerSelected = (String)textView.getText();
+                Log.d("RESPOSTA SELECIONADA", (String)textView.getText());
             }
         });
-
     }
 
     private void setTextViewBackgroundColor(TextView textView, View rootView) {
@@ -163,5 +165,19 @@ public class QuestionAdapter extends CursorAdapter {
         }
     }
 
+    public static boolean nextEvent(Cursor cursor) {
+
+        Question question = new Question(cursor);
+        if (mLastAnswerSelected.equals(question.getCorrectAnswer())) {
+            Log.d("GUSTAVO", "Avançou com a resposta correta");
+            //TO DO
+            return true;
+        }
+        else {
+            Log.d("GUSTAVO", "Avançou com a resposta incorreta");
+            //TO DO
+            return false;
+        }
+    }
 
 }

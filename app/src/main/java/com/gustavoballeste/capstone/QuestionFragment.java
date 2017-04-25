@@ -32,6 +32,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     public static View mView;
     int mNum;
     int mCategoryCode;
+    private static Cursor mCursor;
 
     private QuestionAdapter mAdapter;
     private AdapterViewFlipper mQuestionView;
@@ -108,6 +109,8 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         final Button button = (Button) view.findViewById(R.id.goto_next);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                QuestionAdapter.nextEvent(mCursor);
+
                 mQuestionView.showNext();
                 button.setVisibility(View.GONE);
             }
@@ -175,6 +178,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
+        mCursor = data;
         final int count1 = mQuestionView.getAdapter().getCount();
         Log.d(new Object(){}.getClass().getEnclosingMethod().getName(), count1+" registros no adapter");
 

@@ -25,6 +25,4 @@ public class ScoreActivity extends Activity{
         textView.setText(score.getScore());
 
     }
-
-
 }

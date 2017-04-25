@@ -10,7 +10,6 @@ public class Score {
     private int id;
     private int score ;
 
-
     public int getId() { return id; }
     public int getScore() { return score; }
 

@@ -111,32 +111,11 @@ public class ScoreProvider extends ContentProvider {
             returnUri = ScoreContract.ScoreEntry.buildScoreUri(_id);
         }
         else {
-            throw new android.database.SQLException("Failed to insert row into MOVIE TABLE: " + uri);
+            throw new android.database.SQLException("Failed to insert row into SCORE TABLE: " + uri);
         }
 
         getContext().getContentResolver().notifyChange(uri, null);
         return returnUri;
-    }
-
-    @Override
-    public int bulkInsert(Uri uri, ContentValues[] values){
-        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-
-        db.beginTransaction();
-        int retCount = 0;
-        try {
-            for (ContentValues value : values) {
-                long _id = db.insert(ScoreContract.ScoreEntry.TABLE_NAME, null, value);
-                if (_id != -1) {
-                    retCount++;
-                }
-            }
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
-        }
-        getContext().getContentResolver().notifyChange(uri, null);
-        return retCount;
     }
 
     @Override
