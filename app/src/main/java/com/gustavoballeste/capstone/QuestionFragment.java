@@ -15,8 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
 import android.widget.Button;
-import android.widget.TextView;
-
 
 import com.gustavoballeste.capstone.adapter.QuestionAdapter;
 import com.gustavoballeste.capstone.data.QuestionContract;
@@ -24,7 +22,6 @@ import com.gustavoballeste.capstone.helper.ApiLevelHelper;
 import com.gustavoballeste.capstone.helper.Utility;
 import com.gustavoballeste.capstone.query.FetchQuestionTask;
 
-import org.w3c.dom.Text;
 
 /**
  * Created by gustavoballeste on 18/04/17.
@@ -32,11 +29,12 @@ import org.w3c.dom.Text;
 
 public class QuestionFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
+    public static View mView;
     int mNum;
     int mCategoryCode;
 
     private QuestionAdapter mAdapter;
-    AdapterViewFlipper mQuestionView;
+    private AdapterViewFlipper mQuestionView;
 
     private static final int QUESTION_LOADER = 0;
 
@@ -87,7 +85,6 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
-
         mAdapter = new QuestionAdapter(getActivity(), null, 0);
 
         View view = inflater.inflate(R.layout.question_fragment, container, false);
@@ -106,12 +103,13 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
-
+        mView = view;
         //Watch for button click to next question.
-        Button button = (Button) view.findViewById(R.id.goto_next);
+        final Button button = (Button) view.findViewById(R.id.goto_next);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mQuestionView.showNext();
+                button.setVisibility(View.GONE);
             }
         });
 
@@ -125,13 +123,6 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         }
         mQuestionView.setInAnimation(getActivity(), R.animator.slide_in_bottom);
         mQuestionView.setOutAnimation(getActivity(), R.animator.slide_out_top);
-    }
-
-    private QuestionAdapter getQuizAdapter() {
-        if (null == mAdapter) {
-            mAdapter = new QuestionAdapter(getContext(), null, 0);
-        }
-        return mAdapter;
     }
 
     @Override

@@ -2,17 +2,12 @@ package com.gustavoballeste.capstone;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterViewAnimator;
-import android.widget.Button;
-
 /**
  * Created by gustavoballeste on 17/04/17.
  */
 
 public class QuestionActivity extends AppCompatActivity {
     static final int NUM_ITEMS = 10;
-    private  AdapterViewAnimator mQuestionView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.gustavoballeste.capstone.QuestionFragment;
@@ -114,12 +115,16 @@ public class QuestionAdapter extends CursorAdapter {
 
     }
 
-    private void setListener(View rootView, int resourceId) {
+    private void setListener(final View rootView, int resourceId) {
 
         final TextView textView = (TextView) rootView.findViewById(resourceId);
         final View view = rootView;
+        final View buttonRootView = QuestionFragment.mView;
         textView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //Não está funcionando
+                Button button = (Button)buttonRootView.findViewById(R.id.goto_next);
+                button.setVisibility(View.VISIBLE);
                 setTextViewBackgroundColor(textView, view);
             }
         });
