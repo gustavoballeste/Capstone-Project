@@ -159,7 +159,7 @@ public class FetchQuestionTask  extends AsyncTask {
 
             }
             moviesJsonStr = buffer.toString();
-            Log.v("Result", moviesJsonStr);
+            Log.v("Score", moviesJsonStr);
 
             createMovieListFromJson(moviesJsonStr);
 

@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class QuestionActivity extends AppCompatActivity {
-    static final int NUM_ITEMS = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
