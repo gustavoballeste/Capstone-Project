@@ -1,6 +1,7 @@
 package com.gustavoballeste.capstone;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,8 +19,10 @@ import android.widget.Button;
 
 import com.gustavoballeste.capstone.adapter.QuestionAdapter;
 import com.gustavoballeste.capstone.data.QuestionContract;
+import com.gustavoballeste.capstone.data.ScoreDBHelper;
 import com.gustavoballeste.capstone.helper.ApiLevelHelper;
 import com.gustavoballeste.capstone.helper.Utility;
+import com.gustavoballeste.capstone.model.Question;
 import com.gustavoballeste.capstone.query.FetchQuestionTask;
 
 
@@ -109,14 +112,39 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         final Button button = (Button) view.findViewById(R.id.goto_next);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                QuestionAdapter.nextEvent(mCursor);
-
-                mQuestionView.showNext();
                 button.setVisibility(View.GONE);
+                validateQuestion();
             }
         });
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void validateQuestion() {
+        int nextItem = mQuestionView.getDisplayedChild() + 1;
+        final int count = mQuestionView.getAdapter().getCount();
+        if (QuestionAdapter.mLastAnswerSelected.equals(new Question(mCursor).getCorrectAnswer())) {
+            Log.d("GUSTAVO", "Resposta correta");
+            ScoreDBHelper.updateScore(getContext());
+            //1. Altera a cor do textview para verde
+        }
+        else {
+            //2. Altera a cor do textview para vermelho
+            Log.d("GUSTAVO", "Resposta incorreta");
+        }
+        //3. Se o AdapterViewFlipper chegou no último registro, passsa para a tela de resposta,
+        //      senão mostra a próxima pergunta.
+
+        //4. Incluir um delay antes de passar ao próximo passo.
+        if (nextItem < count) {
+            Log.d("GUSTAVO", "Avança para a próxima pergunta");
+            mQuestionView.showNext();
+        }
+        else {
+            Intent intent = new Intent(getActivity(), ScoreActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -169,7 +197,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
         FetchQuestionTask moviesTask = new FetchQuestionTask(getActivity(), this);
 
-        moviesTask.execute(mCategoryCode);//passar a categoria
+        moviesTask.execute(mCategoryCode);
 
         getLoaderManager().restartLoader(QUESTION_LOADER, null, this);
     }

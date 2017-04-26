@@ -59,4 +59,6 @@
     <string name="boolean_type">boolean</string>
     <string name="multiple_type">multiple</string>
 
+    <string name="zero">0</string>
+
 </resources>

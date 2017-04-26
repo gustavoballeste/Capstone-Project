@@ -2,29 +2,26 @@ package com.gustavoballeste.capstone.model;
 
 import android.database.Cursor;
 
+import com.gustavoballeste.capstone.ScoreActivity;
+
 /**
  * Created by gustavoballeste on 17/04/17.
  */
 
 public class Score {
     private int id;
-    private int score ;
+    private int total;
 
     public int getId() { return id; }
-    public int getScore() { return score; }
+    public int getTotal() { return total; }
 
-    public Score() {
-        this.id = id;
-        this.score = score;
+    public void setTotal(int total) {
+        this.total = total;
     }
 
-    public Score(int id, int score) {
-        this.id = id;
-        this.score = score;
+    public Score(Cursor cursor) {
+        this.id = cursor.getInt(ScoreActivity.COL_ID);
+        this.total = cursor.getInt(ScoreActivity.COL_TOTAL);
     }
 
-    public Score(Cursor cursor){
-//        this.id = cursor.getInt(ResultActivity.COL_ID);
-//        this.score = cursor.getString(ResultActivity.COL_SCORE);
-    }
 }

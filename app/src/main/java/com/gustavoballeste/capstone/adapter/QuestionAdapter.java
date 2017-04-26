@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.gustavoballeste.capstone.QuestionFragment;
 import com.gustavoballeste.capstone.R;
 import com.gustavoballeste.capstone.model.Question;
+import com.gustavoballeste.capstone.model.Score;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +38,7 @@ public class QuestionAdapter extends CursorAdapter {
     TextView mAnswer4View;
     String mType;
 
-    static String mLastAnswerSelected;
+    public static String mLastAnswerSelected;
 
     public QuestionAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
@@ -72,7 +73,6 @@ public class QuestionAdapter extends CursorAdapter {
         else {
             loadMultipleTypeView(cursor, view);
         }
-
     }
 
     private void loadBooleanTypeView(Cursor cursor, View rootView) {
@@ -91,7 +91,6 @@ public class QuestionAdapter extends CursorAdapter {
         cardView3.setVisibility(View.GONE);
         CardView cardView4 = (CardView)rootView.findViewById(R.id.answer4_card_view);
         cardView4.setVisibility(View.GONE);
-
     }
 
     private void loadMultipleTypeView(Cursor cursor, View rootView) {
@@ -162,21 +161,6 @@ public class QuestionAdapter extends CursorAdapter {
         }
         else {
             tv.setBackgroundColor(ContextCompat.getColor(mContext, R.color.answer_unselected_color));
-        }
-    }
-
-    public static boolean nextEvent(Cursor cursor) {
-
-        Question question = new Question(cursor);
-        if (mLastAnswerSelected.equals(question.getCorrectAnswer())) {
-            Log.d("GUSTAVO", "Avançou com a resposta correta");
-            //TO DO
-            return true;
-        }
-        else {
-            Log.d("GUSTAVO", "Avançou com a resposta incorreta");
-            //TO DO
-            return false;
         }
     }
 

@@ -50,7 +50,6 @@ public class Question implements Parcelable {
     }
 
     public Question(Cursor cursor){
-        String id = cursor.getString(QuestionFragment.COL_ID);
 
         this.id = cursor.getInt(QuestionFragment.COL_ID);
         this.question_number = cursor.getString(QuestionFragment.COL_QUESTION_NUMBER);

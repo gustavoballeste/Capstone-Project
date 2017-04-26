@@ -15,6 +15,7 @@ public class QuestionContract {
     public static final String CONTENT_AUTHORITY = "com.gustavoballeste.capstone";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String QUESTION_PATH = "question";
+    public static final String SCORE_PATH = "score";
 
     public static final class QuestionEntry implements BaseColumns {
         public static final String TABLE_NAME = "question";
@@ -43,6 +44,27 @@ public class QuestionContract {
         }
 
         public static int getQuestionIDFromUri(Uri uri){
+            return Integer.parseInt(uri.getPathSegments().get(1));
+        }
+    }
+    public static final class ScoreEntry implements BaseColumns {
+        public static final String TABLE_NAME = "score";
+        public static final String COLUMN_SCORE = "total";
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(SCORE_PATH).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + SCORE_PATH;
+
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + SCORE_PATH;
+
+        public static Uri buildScoreUri(long id){
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static int getScoreIDFromUri(Uri uri){
             return Integer.parseInt(uri.getPathSegments().get(1));
         }
     }

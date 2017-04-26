@@ -14,11 +14,7 @@
             android:name=".data.QuestionProvider"
             android:enabled="true"
             />
-        <provider
-            android:authorities="com.gustavoballeste.capstone"
-            android:name=".data.ScoreProvider"
-            android:enabled="true"
-            />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.gustavoballeste.capstone.data.ScoreDBHelper;
 import com.gustavoballeste.capstone.model.Score;
 
 
@@ -13,16 +14,17 @@ import com.gustavoballeste.capstone.model.Score;
 
 public class ScoreActivity extends Activity{
 
+    public static final int COL_ID = 0;
+    public static final int COL_TOTAL= 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        Score score = new Score();
-
         TextView textView = (TextView)findViewById(R.id.score_text_view);
-        textView.setText(score.getScore());
-
+        int score = ScoreDBHelper.getScore(this);
+        String scoreString = Integer.toString(score);
+        textView.setText(scoreString);
     }
 }
