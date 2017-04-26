@@ -33,8 +33,10 @@ import com.gustavoballeste.capstone.query.FetchQuestionTask;
 public class QuestionFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
     public static View mView;
-    int mNum;
-    int mCategoryCode;
+    private int mNum;
+    private int mCategoryCode;
+    private int mRoundScore = 0;
+    private String mCategoryName;
     private static Cursor mCursor;
 
     private QuestionAdapter mAdapter;
@@ -78,7 +80,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         super.onCreate(savedInstanceState);
         mNum = getArguments() != null ? getArguments().getInt("num")+1 : 1;
         mCategoryCode = getActivity().getIntent().getExtras().getInt("category_code");
-
+        mCategoryName = getActivity().getIntent().getExtras().getString("category");
     }
 
     /**
@@ -126,6 +128,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         if (QuestionAdapter.mLastAnswerSelected.equals(new Question(mCursor).getCorrectAnswer())) {
             Log.d("GUSTAVO", "Resposta correta");
             ScoreDBHelper.updateScore(getContext());
+            mRoundScore++;
             //1. Altera a cor do textview para verde
         }
         else {
@@ -141,7 +144,10 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
             mQuestionView.showNext();
         }
         else {
-            Intent intent = new Intent(getActivity(), ScoreActivity.class);
+            Intent intent = new Intent(getActivity(), ScoreActivity.class)
+                .putExtra("category", mCategoryName)
+                .putExtra("round_score", mRoundScore + "/10")
+                .putExtra("category_code", mCategoryCode);
             startActivity(intent);
         }
 

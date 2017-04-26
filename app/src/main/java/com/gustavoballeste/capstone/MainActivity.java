@@ -38,6 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Return the category ID according to opentdb.org
     private int getCategoryId(int position) {
-        return position + 9; //9 is the inicial category code
+        return position + 9; //9 is the inicial category code of opentdb.org
     }
 }
