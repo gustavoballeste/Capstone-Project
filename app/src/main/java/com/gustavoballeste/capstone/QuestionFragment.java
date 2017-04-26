@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -157,16 +160,14 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
             Log.d("GUSTAVO", "Resposta correta");
             ScoreDBHelper.updateScore(getContext());
             mRoundScore++;
+
             //1. Altera a cor do textview para verde
         }
         else {
             //2. Altera a cor do textview para vermelho
             Log.d("GUSTAVO", "Resposta incorreta");
         }
-        //3. Se o AdapterViewFlipper chegou no último registro, passsa para a tela de resposta,
-        //      senão mostra a próxima pergunta.
 
-        //4. Incluir um delay antes de passar ao próximo passo.
         if (nextItem < count) {
             Log.d("GUSTAVO", "Avança para a próxima pergunta");
             mQuestionView.showNext();
