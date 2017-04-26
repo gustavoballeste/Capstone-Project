@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.gustavoballeste.capstone.adapter.QuestionAdapter;
 import com.gustavoballeste.capstone.data.QuestionContract;
 import com.gustavoballeste.capstone.data.ScoreDBHelper;
@@ -41,6 +44,9 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     private QuestionAdapter mAdapter;
     private AdapterViewFlipper mQuestionView;
+
+    InterstitialAd mInterstitialAd;
+    Button mNextButton;
 
     private static final int QUESTION_LOADER = 0;
 
@@ -110,16 +116,38 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         mView = view;
-        //Watch for button click to next question.
-        final Button button = (Button) view.findViewById(R.id.goto_next);
-        button.setOnClickListener(new View.OnClickListener() {
+
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mNextButton = (Button) view.findViewById(R.id.goto_next);
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+                showTotalScore();
+            }
+        });
+
+        requestNewInterstitial();
+
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                button.setVisibility(View.GONE);
+                mNextButton.setVisibility(View.GONE);
                 validateQuestion();
             }
         });
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("351874082984132")
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
     }
 
     public void validateQuestion() {
@@ -144,13 +172,21 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
             mQuestionView.showNext();
         }
         else {
-            Intent intent = new Intent(getActivity(), ScoreActivity.class)
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                showTotalScore();
+            }
+        }
+
+    }
+
+    private void showTotalScore() {
+        Intent intent = new Intent(getActivity(), ScoreActivity.class)
                 .putExtra("category", mCategoryName)
                 .putExtra("round_score", mRoundScore + "/10")
                 .putExtra("category_code", mCategoryCode);
-            startActivity(intent);
-        }
-
+        startActivity(intent);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
