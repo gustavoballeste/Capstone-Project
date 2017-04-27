@@ -86,5 +86,14 @@
     <string name="choose_category">CHOOSE CATEGORY</string>
     <string name="choose_another_category">choose another category</string>
     <string name="next">Next</string>
+    <string name="results">results</string>
+    <string name="type">type</string>
+    <string name="difficulty">difficulty</string>
+    <string name="question">question</string>
+    <string name="correct_answer">correct_answer</string>
+    <string name="incorrect_answers">incorrect_answers</string>
+    <string name="multiple">multiple</string>
+    <string name="max_question_number_column">/10</string>
+    <string name="base_opentdb_url">https://opentdb.com/api.php?amount=10</string>
 
 </resources>

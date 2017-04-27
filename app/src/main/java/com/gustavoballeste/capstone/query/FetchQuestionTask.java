@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.gustavoballeste.capstone.QuestionFragment;
+import com.gustavoballeste.capstone.R;
 import com.gustavoballeste.capstone.data.QuestionContract;
 
 import org.json.JSONArray;
@@ -43,15 +44,14 @@ public class FetchQuestionTask  extends AsyncTask {
 
         JSONObject questionsJson = new JSONObject(questionsJsonString);
 
-        final String QUESTIONDB_RESULTS = "results";
+        final String QUESTIONDB_RESULTS = mContext.getString(R.string.results);
         JSONArray questionsArray = questionsJson.getJSONArray((QUESTIONDB_RESULTS));
-        final String question_category = "category";
-        final String question_type = "type";
-        final String question_difficulty = "difficulty";
-        final String question_statement = "question";
-        final String question_correct_answer = "correct_answer";
-        final String question_incorrect_answers = "incorrect_answers"; //Um array de 3 strings
-
+        final String question_category = mContext.getString(R.string.category);
+        final String question_type = mContext.getString(R.string.type);
+        final String question_difficulty = mContext.getString(R.string.difficulty);
+        final String question_statement = mContext.getString(R.string.question);
+        final String question_correct_answer = mContext.getString(R.string.correct_answer);
+        final String question_incorrect_answers = mContext.getString(R.string.incorrect_answers);
 
         try {
             int deleted = mContext.getContentResolver().delete(QuestionContract.QuestionEntry.CONTENT_URI, null, null);
@@ -75,7 +75,7 @@ public class FetchQuestionTask  extends AsyncTask {
 
                 incorrect_answer1 = incorrectQuestionsArray.get(0).toString();
 
-                if (type.equals("multiple")) {
+                if (type.equals(mContext.getString(R.string.multiple))) {
                     incorrect_answer2 = incorrectQuestionsArray.get(1).toString();
                     incorrect_answer3 = incorrectQuestionsArray.get(2).toString();
                 }
@@ -83,7 +83,7 @@ public class FetchQuestionTask  extends AsyncTask {
                 ContentValues contentValues = new ContentValues();
 
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_CATEGORY, category);
-                contentValues.put(QuestionContract.QuestionEntry.COLUMN_QUESTION_NUMBER, (i+1+"/10")); // Can be 1 to 10
+                contentValues.put(QuestionContract.QuestionEntry.COLUMN_QUESTION_NUMBER, (i+1+mContext.getString(R.string.max_question_number_column)));
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_TYPE, type);
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_DIFFICULTY, difficulty);
                 contentValues.put(QuestionContract.QuestionEntry.COLUMN_STATEMENT, statement);
@@ -125,9 +125,9 @@ public class FetchQuestionTask  extends AsyncTask {
 
         try{
 
-            final String baseUrl = "https://opentdb.com/api.php?amount=10";
+            final String baseUrl = mContext.getString(R.string.base_opentdb_url);
 
-           final String SORT_PARAM = "category";
+           final String SORT_PARAM = mContext.getString(R.string.category);
 
             Uri queryUri = Uri.parse(baseUrl).buildUpon()
                     .appendQueryParameter(SORT_PARAM, categoryCode)
