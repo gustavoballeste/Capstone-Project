@@ -184,6 +184,8 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
                 .putExtra(getString(R.string.round_score), mRoundScore + getString(R.string.max_round_score))
                 .putExtra(getString(R.string.category_code), mCategoryCode);
         startActivity(intent);
+        getActivity().finish();
+
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

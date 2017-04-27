@@ -24,7 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".QuestionActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".ScoreActivity"
             android:screenOrientation="portrait"/>
     </application>

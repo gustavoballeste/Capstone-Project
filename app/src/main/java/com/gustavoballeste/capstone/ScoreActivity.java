@@ -62,6 +62,7 @@ public class ScoreActivity extends Activity{
             public void onClick(View v) {
                 Intent intent = new Intent(ScoreActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
