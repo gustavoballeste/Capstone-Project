@@ -8,7 +8,7 @@
     <GridView
         android:numColumns="auto_fit"
         android:gravity="center"
-        android:columnWidth="200dp"
+        android:columnWidth="@dimen/grid_view_column_width_600"
         android:stretchMode="columnWidth"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

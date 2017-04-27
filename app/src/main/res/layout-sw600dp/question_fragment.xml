@@ -18,13 +18,13 @@
     </AdapterViewFlipper>
     <Button
         android:id="@+id/goto_next"
-        android:layout_width="500dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/large_text_width"
+        android:layout_height="@dimen/large_text_height"
         android:textAllCaps="false"
-        android:text="Next"
-        android:layout_marginBottom="16dp"
-        android:layout_gravity="center_horizontal"
+        android:text="@string/next"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:visibility="gone"
-        android:contentDescription="next">
+        android:contentDescription="@string/next">
     </Button>
 </LinearLayout>

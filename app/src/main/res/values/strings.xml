@@ -80,5 +80,11 @@
 
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="ad_test_device">351874082984132</string>
+    <string name="trivia_title">TRIVIA</string>
+    <string name="total_score_text">Total score</string>
+    <string name="start_again">START AGAIN</string>
+    <string name="choose_category">CHOOSE CATEGORY</string>
+    <string name="choose_another_category">choose another category</string>
+    <string name="next">Next</string>
 
 </resources>

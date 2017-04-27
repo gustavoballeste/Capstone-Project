@@ -154,11 +154,6 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         if (QuestionAdapter.mLastAnswerSelected.equals(new Question(mCursor).getCorrectAnswer())) {
             ScoreDBHelper.updateScore(getContext());
             mRoundScore++;
-
-            //1. Altera a cor do textview para verde
-        }
-        else {
-            //2. Altera a cor do textview para vermelho
         }
 
         if (nextItem < count) {

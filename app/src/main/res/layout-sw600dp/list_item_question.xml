@@ -12,25 +12,25 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:padding="8dp"
-        android:textSize="16sp" />
+        android:padding="@dimen/padding_text_view"
+        android:textSize="@dimen/default_text_size" />
 
     <!--Question-->
     <android.support.v7.widget.CardView
-        android:layout_width="500dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_width="@dimen/large_text_width"
+        android:layout_height="@dimen/title_height"
+        android:layout_marginBottom="@dimen/padding_statement"
         android:layout_gravity="center"
         app:cardUseCompatPadding="true">
         <TextView
             android:id="@+id/statement"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="32dp"
-            android:paddingBottom="32dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:textSize="16sp"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/padding_statement"
+            android:paddingBottom="@dimen/padding_statement"
+            android:paddingLeft="@dimen/padding_size_statement"
+            android:paddingRight="@dimen/padding_size_statement"
+            android:textSize="@dimen/large_text_size"
             android:gravity="center_vertical|center_horizontal"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </android.support.v7.widget.CardView>
@@ -38,80 +38,80 @@
     <!--Answers-->
     <android.support.v7.widget.CardView
         android:id="@+id/answer1_card_view"
-        android:layout_width="500dp"
+        android:layout_width="@dimen/large_text_width"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="@dimen/corner_radius_cardview"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true">
         <TextView
             android:id="@+id/answer1"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="16sp"
+            android:layout_height="@dimen/large_text_height"
+            android:textSize="@dimen/large_text_size"
             android:gravity="center_vertical|center_horizontal"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:padding="6dp"
+            android:padding="@dimen/padding_answer"
             />
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
         android:id="@+id/answer2_card_view"
-        android:layout_width="500dp"
+        android:layout_width="@dimen/large_text_width"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="@dimen/corner_radius_cardview"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true">
 
         <TextView
             android:id="@+id/answer2"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/large_text_height"
             android:gravity="center_vertical|center_horizontal"
-            android:textSize="16sp"
+            android:textSize="@dimen/large_text_size"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:padding="6dp"
+            android:padding="@dimen/padding_answer"
             android:clickable="true"/>
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
         android:id="@+id/answer3_card_view"
-        android:layout_width="500dp"
+        android:layout_width="@dimen/large_text_width"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="@dimen/corner_radius_cardview"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
         >
         <TextView
             android:id="@+id/answer3"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="16sp"
+            android:layout_height="@dimen/large_text_height"
+            android:textSize="@dimen/default_text_size"
             android:gravity="center_vertical|center_horizontal"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:padding="6dp"
+            android:padding="@dimen/padding_answer"
             android:clickable="true" />
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
         android:id="@+id/answer4_card_view"
-        android:layout_width="500dp"
+        android:layout_width="@dimen/large_text_width"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="@dimen/corner_radius_cardview"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true">
         <TextView
             android:id="@+id/answer4"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="16sp"
+            android:layout_height="@dimen/large_text_height"
+            android:textSize="@dimen/large_text_size"
             android:gravity="center_vertical|center_horizontal"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:padding="6dp"
+            android:padding="@dimen/padding_answer"
             android:clickable="true" />
     </android.support.v7.widget.CardView>
 

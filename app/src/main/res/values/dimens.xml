@@ -4,4 +4,27 @@
     <dimen name="activity_vertical_margin">0dp</dimen>
     <dimen name="cardview_padding">6dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="padding_text_view">8dp</dimen>
+    <dimen name="default_text_size">14sp</dimen>
+    <dimen name="large_text_size">16sp</dimen>
+    <dimen name="default_text_width">320dp</dimen>
+    <dimen name="padding_statement">32dp</dimen>
+    <dimen name="padding_size_statement">8dp</dimen>
+    <dimen name="margin">16dp</dimen>
+    <dimen name="corner_radius_cardview">4dp</dimen>
+    <dimen name="padding_answer">6dp</dimen>
+    <dimen name="title_text_size">32dp</dimen>
+    <dimen name="margin_top_score">4dp</dimen>
+    <dimen name="score_text_size">20dp</dimen>
+    <dimen name="margin_bottom_score">32dp</dimen>
+    <dimen name="total_score_layout_size">120dp</dimen>
+    <dimen name="grid_padding">5dp</dimen>
+    <dimen name="grid_image_size">50dp</dimen>
+    <dimen name="grid_text_margin_top">15dp</dimen>
+    <dimen name="grid_text_size">12sp</dimen>
+    <dimen name="grid_column_width">100dp</dimen>
+    <dimen name="grid_view_column_width_600">200dp</dimen>
+    <dimen name="large_text_width">500dp</dimen>
+    <dimen name="title_height">260dp</dimen>
+    <dimen name="large_text_height">60dp</dimen>
 </resources>
