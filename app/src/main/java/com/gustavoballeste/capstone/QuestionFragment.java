@@ -102,11 +102,8 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         mQuestionView = (AdapterViewFlipper) view.findViewById(R.id.question_view_flipper);
 
         mQuestionView.setAdapter(mAdapter);
-        mQuestionView.setSelection(1); //Definir aqui a posição do adapter que será apresentada
+        mQuestionView.setSelection(1);
         setQuizViewAnimations();
-
-        //Debug Gustavo
-        final int count = mQuestionView.getAdapter().getCount();
 
         return view;
     }
@@ -226,16 +223,13 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         {
             updateData();
         }
-
         super.onStart();
     }
 
     public void updateData(){
 
         FetchQuestionTask moviesTask = new FetchQuestionTask(getActivity(), this);
-
         moviesTask.execute(mCategoryCode);
-
         getLoaderManager().restartLoader(QUESTION_LOADER, null, this);
     }
 
@@ -243,13 +237,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 
         mCursor = data;
-        final int count1 = mQuestionView.getAdapter().getCount();
-        Log.d(new Object(){}.getClass().getEnclosingMethod().getName(), count1+ " registros no adapter");
-
         mAdapter.swapCursor(data);
-
-        final int count2 = mQuestionView.getAdapter().getCount();
-        Log.d(new Object(){}.getClass().getEnclosingMethod().getName(), count2+" registros no adapter");
 
     }
 

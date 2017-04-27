@@ -48,8 +48,6 @@ public class QuestionAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
 
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
-
         View view = LayoutInflater.from(context).inflate(R.layout.list_item_question, parent, false);
         ButterKnife.bind(this, view);
         return view;
@@ -57,8 +55,6 @@ public class QuestionAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
-
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         Question question = new Question(cursor);
         String count = question.getQuestionNumber();
@@ -151,7 +147,6 @@ public class QuestionAdapter extends CursorAdapter {
                 button.setVisibility(View.VISIBLE);
                 setTextViewBackgroundColor(textView, view);
                 mLastAnswerSelected = (String)textView.getText();
-                Log.d("RESPOSTA SELECIONADA", (String)textView.getText());
             }
         });
     }
