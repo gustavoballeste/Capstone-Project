@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
 /**
@@ -146,8 +148,10 @@ public class FetchQuestionTask  extends AsyncTask {
             if (inputStream == null) {
 
             }
-            //Testar tipos de padões diferentes. (UTF-8 or ISO-8859-1) Ainda está com problema
-            reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+            //Testar tipos de padões diferentes. (UTF-8 / ISO-8859-1 / ISO-8859-2) Ainda está com problema
+//            reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+
+            reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 
             String line;
             while ((line = reader.readLine()) != null) {

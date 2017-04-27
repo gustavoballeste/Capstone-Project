@@ -57,70 +57,94 @@ public class QuestionAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
+
         Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         Question question = new Question(cursor);
+        String count = question.getQuestionNumber();
+        String statement = question.getStatement();
+
         mCountView = (TextView) view.findViewById(R.id.count);
-        mCountView.setText(question.getQuestionNumber());
+        mCountView.setText(count);
+        mCountView.setContentDescription(count);
+
 
         mStatementView = (TextView) view.findViewById(R.id.statement);
-        mStatementView.setText(question.getStatement());
+        mStatementView.setText(statement);
+        mStatementView.setContentDescription("Question: " + statement);
 
         mType = question.getType();
         if (mType.equals(mContext.getString(R.string.boolean_type))) {
-            loadBooleanTypeView(cursor, view);
+            loadBooleanTypeView(view);
         }
         else {
             loadMultipleTypeView(cursor, view);
         }
     }
 
-    private void loadBooleanTypeView(Cursor cursor, View rootView) {
-        List<String> booleanAnswers = new ArrayList<>();
-        booleanAnswers.add(cursor.getString(QuestionFragment.COL_CORRECT_ANSWER));
-        booleanAnswers.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1));
+    private void loadBooleanTypeView(View rootView) {
+
         mAnswer1View = (TextView) rootView.findViewById(R.id.answer1);
-        mAnswer1View.setText(booleanAnswers.get(0));
+        mAnswer1View.setText("True");
+        mAnswer1View.setContentDescription("True");
+
         mAnswer2View = (TextView) rootView.findViewById(R.id.answer2);
-        mAnswer2View.setText(booleanAnswers.get(1));
+        mAnswer2View.setText("False");
+        mAnswer1View.setContentDescription("False");
+
         setListener(rootView, R.id.answer1);
         setListener(rootView, R.id.answer2);
 
         //Hide the cardViews used just for type 'multiple'
         CardView cardView3 = (CardView)rootView.findViewById(R.id.answer3_card_view);
         cardView3.setVisibility(View.GONE);
+
         CardView cardView4 = (CardView)rootView.findViewById(R.id.answer4_card_view);
         cardView4.setVisibility(View.GONE);
     }
 
     private void loadMultipleTypeView(Cursor cursor, View rootView) {
+
         List<String> multipleAnswers = new ArrayList<>();
         multipleAnswers.add(cursor.getString(QuestionFragment.COL_CORRECT_ANSWER));
         multipleAnswers.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER1));
         multipleAnswers.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER2));
         multipleAnswers.add(cursor.getString(QuestionFragment.COL_INCORRECT_ANSWER3));
         Collections.shuffle(multipleAnswers);
+
+        String answer1 = multipleAnswers.get(0);
+        String answer2 = multipleAnswers.get(1);
+        String answer3 = multipleAnswers.get(2);
+        String answer4 = multipleAnswers.get(3);
+
         mAnswer1View = (TextView) rootView.findViewById(R.id.answer1);
-        mAnswer1View.setText(multipleAnswers.get(0));
+        mAnswer1View.setText(answer1);
+        mAnswer1View.setContentDescription("Option 1: " + answer1);
+
         mAnswer2View = (TextView) rootView.findViewById(R.id.answer2);
-        mAnswer2View.setText(multipleAnswers.get(1));
+        mAnswer2View.setText(answer2);
+        mAnswer2View.setContentDescription("Option 2: " + answer2);
+
         mAnswer3View = (TextView) rootView.findViewById(R.id.answer3);
-        mAnswer3View.setText(multipleAnswers.get(2));
+        mAnswer3View.setText(answer3);
+        mAnswer3View.setContentDescription("Option 3: " + answer3);
+
         mAnswer4View = (TextView) rootView.findViewById(R.id.answer4);
-        mAnswer4View.setText(multipleAnswers.get(3));
+        mAnswer4View.setText(answer4);
+        mAnswer4View.setContentDescription("Option 4: " + answer4);
+
         setListener(rootView, R.id.answer1);
         setListener(rootView, R.id.answer2);
         setListener(rootView, R.id.answer3);
         setListener(rootView, R.id.answer4);
-
     }
 
     private void setListener(final View rootView, int resourceId) {
 
         final TextView textView = (TextView) rootView.findViewById(resourceId);
-
         final View view = rootView;
         final View buttonRootView = QuestionFragment.mView;
+
         textView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Button button = (Button)buttonRootView.findViewById(R.id.goto_next);
@@ -133,6 +157,7 @@ public class QuestionAdapter extends CursorAdapter {
     }
 
     private void setTextViewBackgroundColor(TextView textView, View rootView) {
+
         int textViewId = textView.getId();
         int answer1Id = R.id.answer1;
         int answer2Id = R.id.answer2;
@@ -163,5 +188,4 @@ public class QuestionAdapter extends CursorAdapter {
             tv.setBackgroundColor(ContextCompat.getColor(mContext, R.color.answer_unselected_color));
         }
     }
-
 }

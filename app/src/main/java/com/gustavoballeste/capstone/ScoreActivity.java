@@ -3,13 +3,11 @@ package com.gustavoballeste.capstone;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.gustavoballeste.capstone.data.ScoreDBHelper;
-import com.gustavoballeste.capstone.model.Score;
 
 
 /**
@@ -23,31 +21,31 @@ public class ScoreActivity extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        int score;
-        String roundScore;
-        String scoreString;
 
+        String roundScore;
+        String totalScore;
         final String category;
         final int categoryCode;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        TextView scoreTextView = (TextView)findViewById(R.id.score_text_view);
-        score = ScoreDBHelper.getScore(this);
-        scoreString = Integer.toString(score);
-        scoreTextView.setText(scoreString);
+        TextView totalScoreTextView = (TextView)findViewById(R.id.total_score_text_view);
+        totalScore = Integer.toString(ScoreDBHelper.getScore(this));
+        totalScoreTextView.setText(totalScore);
+        totalScoreTextView.setContentDescription("Total score: " + totalScore + " points");
 
         category = getIntent().getExtras().getString("category");
         categoryCode = getIntent().getExtras().getInt("category_code");
         roundScore = getIntent().getExtras().getString("round_score");
 
-
         TextView categoryTextView = (TextView)findViewById(R.id.score_category_text_view);
         categoryTextView.setText(category);
+        categoryTextView.setContentDescription("Category: " + category);
 
         TextView roundScoreTextView = (TextView)findViewById(R.id.round_score_text_view);
         roundScoreTextView.setText(roundScore);
+        roundScoreTextView.setContentDescription("Round score: " + roundScore + " points");
 
         Button startAgainButton = (Button)findViewById(R.id.start_again);
         startAgainButton.setOnClickListener(new View.OnClickListener() {

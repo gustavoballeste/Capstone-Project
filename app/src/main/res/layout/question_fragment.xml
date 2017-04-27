@@ -24,6 +24,7 @@
         android:text="Next"
         android:layout_marginBottom="16dp"
         android:layout_gravity="center_horizontal"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:contentDescription="next">
     </Button>
 </LinearLayout>
