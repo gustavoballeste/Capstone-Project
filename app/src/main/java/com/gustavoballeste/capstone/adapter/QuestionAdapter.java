@@ -71,7 +71,7 @@ public class QuestionAdapter extends CursorAdapter {
 
         mStatementView = (TextView) view.findViewById(R.id.statement);
         mStatementView.setText(statement);
-        mStatementView.setContentDescription("Question: " + statement);
+        mStatementView.setContentDescription(mContext.getString(R.string.question_inicial_description) + statement);
 
         mType = question.getType();
         if (mType.equals(mContext.getString(R.string.boolean_type))) {
@@ -85,12 +85,12 @@ public class QuestionAdapter extends CursorAdapter {
     private void loadBooleanTypeView(View rootView) {
 
         mAnswer1View = (TextView) rootView.findViewById(R.id.answer1);
-        mAnswer1View.setText("True");
-        mAnswer1View.setContentDescription("True");
+        mAnswer1View.setText(R.string.true_answer);
+        mAnswer1View.setContentDescription(mContext.getResources().getString(R.string.true_answer));
 
         mAnswer2View = (TextView) rootView.findViewById(R.id.answer2);
-        mAnswer2View.setText("False");
-        mAnswer1View.setContentDescription("False");
+        mAnswer2View.setText(R.string.false_answer);
+        mAnswer1View.setContentDescription(mContext.getResources().getString(R.string.false_answer));
 
         setListener(rootView, R.id.answer1);
         setListener(rootView, R.id.answer2);
@@ -119,19 +119,19 @@ public class QuestionAdapter extends CursorAdapter {
 
         mAnswer1View = (TextView) rootView.findViewById(R.id.answer1);
         mAnswer1View.setText(answer1);
-        mAnswer1View.setContentDescription("Option 1: " + answer1);
+        mAnswer1View.setContentDescription(mContext.getString(R.string.option_1_inicial_description) + answer1);
 
         mAnswer2View = (TextView) rootView.findViewById(R.id.answer2);
         mAnswer2View.setText(answer2);
-        mAnswer2View.setContentDescription("Option 2: " + answer2);
+        mAnswer2View.setContentDescription(mContext.getString(R.string.option_2_inicial_description) + answer2);
 
         mAnswer3View = (TextView) rootView.findViewById(R.id.answer3);
         mAnswer3View.setText(answer3);
-        mAnswer3View.setContentDescription("Option 3: " + answer3);
+        mAnswer3View.setContentDescription(mContext.getString(R.string.option_3_inicial_description) + answer3);
 
         mAnswer4View = (TextView) rootView.findViewById(R.id.answer4);
         mAnswer4View.setText(answer4);
-        mAnswer4View.setContentDescription("Option 4: " + answer4);
+        mAnswer4View.setContentDescription(mContext.getString(R.string.option_4_inicial_description) + answer4);
 
         setListener(rootView, R.id.answer1);
         setListener(rootView, R.id.answer2);

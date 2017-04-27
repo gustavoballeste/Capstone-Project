@@ -15,10 +15,6 @@ public class Score {
     public int getId() { return id; }
     public int getTotal() { return total; }
 
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
     public Score(Cursor cursor) {
         this.id = cursor.getInt(ScoreActivity.COL_ID);
         this.total = cursor.getInt(ScoreActivity.COL_TOTAL);

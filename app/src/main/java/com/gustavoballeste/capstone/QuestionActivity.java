@@ -17,7 +17,7 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
-        getSupportActionBar().setTitle(getIntent().getExtras().getString("category"));
+        getSupportActionBar().setTitle(getIntent().getExtras().getString(getString(R.string.category)));
 
     }
 

@@ -27,7 +27,7 @@
     <string name="category_vehicles">Vehicles</string>
     <string name="category_comics">Comics</string>
     <string name="category_gadgets">Gadgets</string>
-    <string name="category_anime_and_manga">Anime &amp; Manga</string>
+    <string name="category_anime">Anime</string>
     <string name="category_cartoon">Cartoon</string>
 
     <!--Category resource drawables-->
@@ -60,5 +60,25 @@
     <string name="multiple_type">multiple</string>
 
     <string name="zero">0</string>
+    <string name="category">category</string>
+    <string name="category_code">category_code</string>
+    <string name="round_score">round_score</string>
+
+    <string name="true_answer">True</string>
+    <string name="false_answer">False</string>
+
+    <string name="max_round_score">/10</string>
+    <string name="question_inicial_description">Question:</string>
+    <string name="option_1_inicial_description">Option 1:</string>
+    <string name="option_2_inicial_description">Option 2:</string>
+    <string name="option_3_inicial_description">Option 3:</string>
+    <string name="option_4_inicial_description">Option 4:</string>
+    <string name="total_score_inicial_description">Total score:</string>
+    <string name="points_description">points</string>
+    <string name="category_inicial_description">Category:</string>
+    <string name="round_score_inicial_description">Round score:</string>
+
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ad_test_device">351874082984132</string>
 
 </resources>

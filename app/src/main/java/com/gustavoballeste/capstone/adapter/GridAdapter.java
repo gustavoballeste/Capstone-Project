@@ -13,9 +13,13 @@ public class GridAdapter extends BaseAdapter{
     private Context mContext;
 
     public String mCategory;
+    String[] description;
+    int[] imageId;
 
-    public GridAdapter(Context c) {
+    public GridAdapter(Context c, String[] d, int[] i) {
         mContext = c;
+        description = d;
+        imageId = i;
 
     }
 
@@ -58,59 +62,4 @@ public class GridAdapter extends BaseAdapter{
 
         return grid;
     }
-
-    String[] description = {
-            "General",
-            "Books",
-            "Film",
-            "Music",
-            "Theatre",
-            "Television",
-            "Video Games",
-            "Board Games",
-            "Nature",
-            "Computers",
-            "Mathematics",
-            "Mythology",
-            "Sports",
-            "Geography",
-            "History",
-            "Politics",
-            "Art",
-            "Celebrities",
-            "Animals",
-            "Vehicles",
-            "Comics",
-            "Gadgets",
-            "Anime",
-            "Cartooon"
-    } ;
-
-    int[] imageId = {
-            R.drawable.ic_category_general,
-            R.drawable.ic_category_books,
-            R.drawable.ic_category_film,
-            R.drawable.ic_category_music,
-            R.drawable.ic_category_theatre,
-            R.drawable.ic_category_television,
-            R.drawable.ic_category_video_game,
-            R.drawable.ic_category_board_games,
-            R.drawable.ic_category_nature,
-            R.drawable.ic_category_computer,
-            R.drawable.ic_category_mathematics,
-            R.drawable.ic_category_mythology,
-            R.drawable.ic_category_sports,
-            R.drawable.ic_category_geography,
-            R.drawable.ic_category_history,
-            R.drawable.ic_category_politics,
-            R.drawable.ic_category_art,
-            R.drawable.ic_category_celebrity,
-            R.drawable.ic_category_animal,
-            R.drawable.ic_category_vehicle,
-            R.drawable.ic_category_comics,
-            R.drawable.ic_category_gadgets,
-            R.drawable.ic_category_anime,
-            R.drawable.ic_category_cartoon
-    };
-
 }

@@ -39,7 +39,6 @@ import com.gustavoballeste.capstone.query.FetchQuestionTask;
 public class QuestionFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
     public static View mView;
-    private int mNum;
     private int mCategoryCode;
     private int mRoundScore = 0;
     private String mCategoryName;
@@ -84,12 +83,10 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         super.onCreate(savedInstanceState);
-        mNum = getArguments() != null ? getArguments().getInt("num")+1 : 1;
-        mCategoryCode = getActivity().getIntent().getExtras().getInt("category_code");
-        mCategoryName = getActivity().getIntent().getExtras().getString("category");
+        mCategoryCode = getActivity().getIntent().getExtras().getInt(getString(R.string.category_code));
+        mCategoryName = getActivity().getIntent().getExtras().getString(getString(R.string.category));
     }
 
     /**
@@ -99,7 +96,6 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
         mAdapter = new QuestionAdapter(getActivity(), null, 0);
 
         View view = inflater.inflate(R.layout.question_fragment, container, false);
@@ -111,17 +107,17 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
         //Debug Gustavo
         final int count = mQuestionView.getAdapter().getCount();
-        Log.d("LOG_GUSTAVO Count", count+" registros no adapter");
 
         return view;
     }
 
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+
         mView = view;
 
         mInterstitialAd = new InterstitialAd(getActivity());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
         mNextButton = (Button) view.findViewById(R.id.goto_next);
 
         mInterstitialAd.setAdListener(new AdListener() {
@@ -146,18 +142,19 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     private void requestNewInterstitial() {
+
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("351874082984132")
+                .addTestDevice(getString(R.string.ad_test_device))
                 .build();
 
         mInterstitialAd.loadAd(adRequest);
     }
 
     public void validateQuestion() {
+
         int nextItem = mQuestionView.getDisplayedChild() + 1;
         final int count = mQuestionView.getAdapter().getCount();
         if (QuestionAdapter.mLastAnswerSelected.equals(new Question(mCursor).getCorrectAnswer())) {
-            Log.d("GUSTAVO", "Resposta correta");
             ScoreDBHelper.updateScore(getContext());
             mRoundScore++;
 
@@ -165,11 +162,9 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         }
         else {
             //2. Altera a cor do textview para vermelho
-            Log.d("GUSTAVO", "Resposta incorreta");
         }
 
         if (nextItem < count) {
-            Log.d("GUSTAVO", "Avança para a próxima pergunta");
             mQuestionView.showNext();
         }
         else {
@@ -183,15 +178,17 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     private void showTotalScore() {
+
         Intent intent = new Intent(getActivity(), ScoreActivity.class)
-                .putExtra("category", mCategoryName)
-                .putExtra("round_score", mRoundScore + "/10")
-                .putExtra("category_code", mCategoryCode);
+                .putExtra(getString(R.string.category), mCategoryName)
+                .putExtra(getString(R.string.round_score), mRoundScore + getString(R.string.max_round_score))
+                .putExtra(getString(R.string.category_code), mCategoryCode);
         startActivity(intent);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setQuizViewAnimations() {
+
         if (ApiLevelHelper.isLowerThan(Build.VERSION_CODES.LOLLIPOP)) {
             return;
         }
@@ -201,7 +198,6 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(QUESTION_LOADER, null, this);
@@ -210,10 +206,8 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         Loader<Cursor> cursorLoader;
-
         cursorLoader = new CursorLoader(getActivity(),
                 QuestionContract.QuestionEntry.CONTENT_URI,
                 QUESTION_COLUMNS,
@@ -225,7 +219,6 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onStart() {
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         if (Utility.hasNetworkConnection(getActivity()))
         {
@@ -236,7 +229,6 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     public void updateData(){
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         FetchQuestionTask moviesTask = new FetchQuestionTask(getActivity(), this);
 
@@ -247,11 +239,10 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
 
         mCursor = data;
         final int count1 = mQuestionView.getAdapter().getCount();
-        Log.d(new Object(){}.getClass().getEnclosingMethod().getName(), count1+" registros no adapter");
+        Log.d(new Object(){}.getClass().getEnclosingMethod().getName(), count1+ " registros no adapter");
 
         mAdapter.swapCursor(data);
 
@@ -262,7 +253,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        Log.d("GUSTAVO DEBUG", new Object(){}.getClass().getEnclosingMethod().getName());
+
         mAdapter.swapCursor(null);
     }
 

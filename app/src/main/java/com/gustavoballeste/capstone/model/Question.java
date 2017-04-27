@@ -27,13 +27,8 @@ public class Question implements Parcelable {
     public String getQuestionNumber() { return question_number; }
     public String getCategory() { return category; }
     public String getType() { return type; }
-    public String getDifficulty() { return difficulty; }
     public String getStatement() { return statement; }
     public String getCorrectAnswer() { return correctAnswer; }
-    public String getIncorrectAnswer1() { return incorrectAnswer1; }
-    public String getIncorrectAnswer2() { return incorrectAnswer2; }
-    public String getIncorrectAnswer3() { return incorrectAnswer3; }
-    public String getResult() {return result;}
 
     public Question (int id, String questionNumber, String category, String type, String difficulty, String statement, String correctAnswer, String incorrectAnswer1, String incorrectAnswer2, String incorrectAnswer3, String result) {
         this.id = id;
