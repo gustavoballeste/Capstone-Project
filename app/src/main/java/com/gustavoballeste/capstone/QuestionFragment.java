@@ -19,10 +19,12 @@ import android.widget.AdapterViewFlipper;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gustavoballeste.capstone.adapter.QuestionAdapter;
 import com.gustavoballeste.capstone.data.QuestionContract;
 import com.gustavoballeste.capstone.data.ScoreDBHelper;
@@ -78,6 +80,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     public static final int COL_INCORRECT_ANSWER3 = 9;
     public static final int COL_RESULT = 10;
 
+    private static FirebaseAnalytics mFirebaseAnalytics;
     /**
      * When creating, retrieve this instance's number from its arguments.
      */
@@ -87,6 +90,14 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         super.onCreate(savedInstanceState);
         mCategoryCode = getActivity().getIntent().getExtras().getInt(getString(R.string.category_code));
         mCategoryName = getActivity().getIntent().getExtras().getString(getString(R.string.category));
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(mCategoryCode));
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, mCategoryName);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, getResources().getString(R.string.category));
+        mFirebaseAnalytics.logEvent(getString(R.string.category_selected), bundle);
+
     }
 
     /**

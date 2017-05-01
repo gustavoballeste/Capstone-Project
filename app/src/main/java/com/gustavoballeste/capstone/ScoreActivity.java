@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.gustavoballeste.capstone.data.ScoreDBHelper;
 
 
@@ -29,6 +31,10 @@ public class ScoreActivity extends Activity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         TextView totalScoreTextView = (TextView)findViewById(R.id.total_score_text_view);
         totalScore = Integer.toString(ScoreDBHelper.getScore(this));

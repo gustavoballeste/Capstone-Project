@@ -55,11 +55,12 @@ public class GridAdapter extends BaseAdapter{
             grid = convertView;
         }
         TextView textView = (TextView) grid.findViewById(R.id.category_description_text_view);
-        ImageView imageView = (ImageView)grid.findViewById(R.id.category_image_view);
         mCategory = description[position];
         textView.setText(mCategory);
-        imageView.setImageResource(imageId[position]);
 
+        ImageView imageView = (ImageView)grid.findViewById(R.id.category_image_view);
+        imageView.setImageResource(imageId[position]);
+        imageView.setContentDescription(mCategory);
         return grid;
     }
 }

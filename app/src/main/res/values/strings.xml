@@ -95,5 +95,11 @@
     <string name="multiple">multiple</string>
     <string name="max_question_number_column">/10</string>
     <string name="base_opentdb_url">https://opentdb.com/api.php?amount=10</string>
+    <string name="last_question_number">last_question_number</string>
+    <string name="category_selected">category_selected</string>
+    <string name="count">count</string>
+    <string name="unfinished_round">unfinished_round</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
 </resources>
