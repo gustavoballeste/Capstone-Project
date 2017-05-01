@@ -26,7 +26,13 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
         mCategory = getIntent().getExtras().getString(getString(R.string.category));
+        android.support.v7.widget.Toolbar myToolbar =
+                (android.support.v7.widget.Toolbar) findViewById(R.id.question_toolbar);
+        setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle(mCategory);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
     }
 
     @Override

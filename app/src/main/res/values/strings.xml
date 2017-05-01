@@ -30,31 +30,6 @@
     <string name="category_anime">Anime</string>
     <string name="category_cartoon">Cartoon</string>
 
-    <!--Category resource drawables-->
-    <string name="image_general">@drawable/ic_category_general</string>
-    <string name="image_books">@drawable/ic_category_books</string>
-    <string name="image_film">@drawable/ic_category_film</string>
-    <string name="image_music">@drawable/ic_category_music</string>
-    <string name="image_theatres">@drawable/ic_category_theatre</string>
-    <string name="image_television">@drawable/ic_category_television</string>
-    <string name="image_video_games">@drawable/ic_category_video_game</string>
-    <string name="image_board_games">@drawable/ic_category_board_games</string>
-    <string name="image_nature">@drawable/ic_category_nature</string>
-    <string name="image_computers">@drawable/ic_category_computer</string>
-    <string name="image_mathematics">@drawable/ic_category_mathematics</string>
-    <string name="image_mythology">@drawable/ic_category_mythology</string>
-    <string name="image_sports">@drawable/ic_category_sports</string>
-    <string name="image_geography">@drawable/ic_category_geography</string>
-    <string name="image_history">@drawable/ic_category_history</string>
-    <string name="image_politics">@drawable/ic_category_politics</string>
-    <string name="image_art">@drawable/ic_category_art</string>
-    <string name="image_celebrities">@drawable/ic_category_celebrity</string>
-    <string name="image_animals">@drawable/ic_category_animal</string>
-    <string name="image_vehicles">@drawable/ic_category_vehicle</string>
-    <string name="image_comics">@drawable/ic_category_comics</string>
-    <string name="image_gadgets">@drawable/ic_category_gadgets</string>
-    <string name="image_anime">@drawable/ic_category_anime</string>
-    <string name="image_cartoon">@drawable/ic_category_cartoon</string>
     <string name="title_activity_quiz">QuizActivity</string>
     <string name="boolean_type">boolean</string>
     <string name="multiple_type">multiple</string>

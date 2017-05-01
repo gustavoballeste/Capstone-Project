@@ -9,11 +9,21 @@
     android:background="@color/colorPrimaryLight"
     tools:context=".QuestionActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/question_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme"/>
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/fragment_main"
         android:name="com.gustavoballeste.capstone.QuestionFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/question_fragment" />
+        tools:layout="@layout/question_fragment"
+        android:paddingTop="132dp"/>
+
 </LinearLayout>
