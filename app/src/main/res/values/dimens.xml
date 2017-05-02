@@ -27,4 +27,5 @@
     <dimen name="large_text_width">500dp</dimen>
     <dimen name="title_height">260dp</dimen>
     <dimen name="large_text_height">60dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
 </resources>
