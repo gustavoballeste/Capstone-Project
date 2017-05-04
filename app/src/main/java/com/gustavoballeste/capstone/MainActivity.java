@@ -1,6 +1,7 @@
 package com.gustavoballeste.capstone;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,33 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(myToolbar);
-
-        String[] description = {
-                getResources().getString(R.string.category_general),
-                getResources().getString(R.string.category_books),
-                getResources().getString(R.string.category_film),
-                getResources().getString(R.string.category_music),
-                getResources().getString(R.string.category_theatres),
-                getResources().getString(R.string.category_television),
-                getResources().getString(R.string.category_video_games),
-                getResources().getString(R.string.category_board_games),
-                getResources().getString(R.string.category_nature),
-                getResources().getString(R.string.category_computers),
-                getResources().getString(R.string.category_mathematics),
-                getResources().getString(R.string.category_mythology),
-                getResources().getString(R.string.category_sports),
-                getResources().getString(R.string.category_geography),
-                getResources().getString(R.string.category_history),
-                getResources().getString(R.string.category_politics),
-                getResources().getString(R.string.category_art),
-                getResources().getString(R.string.category_celebrities),
-                getResources().getString(R.string.category_animals),
-                getResources().getString(R.string.category_vehicles),
-                getResources().getString(R.string.category_comics),
-                getResources().getString(R.string.category_gadgets),
-                getResources().getString(R.string.category_anime),
-                getResources().getString(R.string.category_cartoon)
-        } ;
 
         int[] imageId = {
                 R.drawable.ic_category_general,
@@ -77,8 +51,9 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.ic_category_cartoon
         };
 
+        String[] descriptions = getResources().getStringArray(R.array.categories);
         GridView grid = (GridView) findViewById(R.id.categories_grid_view);
-        GridAdapter gridAdapter = new GridAdapter(this, description, imageId);
+        GridAdapter gridAdapter = new GridAdapter(this, descriptions, imageId);
         grid.setAdapter(gridAdapter);
 
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
