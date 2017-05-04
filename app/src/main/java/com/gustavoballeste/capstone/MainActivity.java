@@ -24,36 +24,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(myToolbar);
 
-        int[] imageId = {
-                R.drawable.ic_category_general,
-                R.drawable.ic_category_books,
-                R.drawable.ic_category_film,
-                R.drawable.ic_category_music,
-                R.drawable.ic_category_theatre,
-                R.drawable.ic_category_television,
-                R.drawable.ic_category_video_game,
-                R.drawable.ic_category_board_games,
-                R.drawable.ic_category_nature,
-                R.drawable.ic_category_computer,
-                R.drawable.ic_category_mathematics,
-                R.drawable.ic_category_mythology,
-                R.drawable.ic_category_sports,
-                R.drawable.ic_category_geography,
-                R.drawable.ic_category_history,
-                R.drawable.ic_category_politics,
-                R.drawable.ic_category_art,
-                R.drawable.ic_category_celebrity,
-                R.drawable.ic_category_animal,
-                R.drawable.ic_category_vehicle,
-                R.drawable.ic_category_comics,
-                R.drawable.ic_category_gadgets,
-                R.drawable.ic_category_anime,
-                R.drawable.ic_category_cartoon
-        };
-
         String[] descriptions = getResources().getStringArray(R.array.categories);
+        TypedArray images = getResources().obtainTypedArray(R.array.images);
+
         GridView grid = (GridView) findViewById(R.id.categories_grid_view);
-        GridAdapter gridAdapter = new GridAdapter(this, descriptions, imageId);
+        GridAdapter gridAdapter = new GridAdapter(this, descriptions, images);
         grid.setAdapter(gridAdapter);
 
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

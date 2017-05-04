@@ -4,6 +4,7 @@ package com.gustavoballeste.capstone.widget;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -32,9 +33,11 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     }
 
     public void onCreate() {
+
         String[] descriptions = mContext.getResources().getStringArray(R.array.categories);
+        TypedArray images = mContext.getResources().obtainTypedArray(R.array.images);
         for (int i = 0; i < descriptions.length; i++) {
-            mWidgetItems.add(new WidgetItem(descriptions[i], getImageId()[i]));
+            mWidgetItems.add(new WidgetItem(descriptions[i], images.getResourceId(i, -1)));
         }
 
         try {
@@ -84,36 +87,6 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     }
 
     public void onDataSetChanged() {
-    }
-
-    private int[] getImageId(){
-        int[] imageId = {
-                R.drawable.ic_category_general,
-                R.drawable.ic_category_books,
-                R.drawable.ic_category_film,
-                R.drawable.ic_category_music,
-                R.drawable.ic_category_theatre,
-                R.drawable.ic_category_television,
-                R.drawable.ic_category_video_game,
-                R.drawable.ic_category_board_games,
-                R.drawable.ic_category_nature,
-                R.drawable.ic_category_computer,
-                R.drawable.ic_category_mathematics,
-                R.drawable.ic_category_mythology,
-                R.drawable.ic_category_sports,
-                R.drawable.ic_category_geography,
-                R.drawable.ic_category_history,
-                R.drawable.ic_category_politics,
-                R.drawable.ic_category_art,
-                R.drawable.ic_category_celebrity,
-                R.drawable.ic_category_animal,
-                R.drawable.ic_category_vehicle,
-                R.drawable.ic_category_comics,
-                R.drawable.ic_category_gadgets,
-                R.drawable.ic_category_anime,
-                R.drawable.ic_category_cartoon
-        };
-        return imageId;
     }
 
 }

@@ -26,5 +26,32 @@
         <item>Anime</item>
         <item>Cartoon</item>
     </string-array>
-    
+
+    <integer-array name="images">
+        <item>@drawable/ic_category_general</item>
+        <item>@drawable/ic_category_books</item>
+        <item>@drawable/ic_category_film</item>
+        <item>@drawable/ic_category_music</item>
+        <item>@drawable/ic_category_theatre</item>
+        <item>@drawable/ic_category_television</item>
+        <item>@drawable/ic_category_video_game</item>
+        <item>@drawable/ic_category_board_games</item>
+        <item>@drawable/ic_category_nature</item>
+        <item>@drawable/ic_category_computer</item>
+        <item>@drawable/ic_category_mathematics</item>
+        <item>@drawable/ic_category_mythology</item>
+        <item>@drawable/ic_category_sports</item>
+        <item>@drawable/ic_category_geography</item>
+        <item>@drawable/ic_category_history</item>
+        <item>@drawable/ic_category_politics</item>
+        <item>@drawable/ic_category_art</item>
+        <item>@drawable/ic_category_celebrity</item>
+        <item>@drawable/ic_category_animal</item>
+        <item>@drawable/ic_category_vehicle</item>
+        <item>@drawable/ic_category_comics</item>
+        <item>@drawable/ic_category_gadgets</item>
+        <item>@drawable/ic_category_anime</item>
+        <item>@drawable/ic_category_cartoon</item>
+    </integer-array>
+
 </resources>

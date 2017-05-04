@@ -1,5 +1,6 @@
 package com.gustavoballeste.capstone.adapter;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,9 @@ public class GridAdapter extends BaseAdapter{
 
     public String mCategory;
     String[] description;
-    int[] imageId;
+    TypedArray imageId;
 
-    public GridAdapter(Context c, String[] d, int[] i) {
+    public GridAdapter(Context c, String[] d, TypedArray i) {
         mContext = c;
         description = d;
         imageId = i;
@@ -59,7 +60,7 @@ public class GridAdapter extends BaseAdapter{
         textView.setText(mCategory);
 
         ImageView imageView = (ImageView)grid.findViewById(R.id.category_image_view);
-        imageView.setImageResource(imageId[position]);
+        imageView.setImageResource(imageId.getResourceId(position, -1));
         imageView.setContentDescription(mCategory);
         return grid;
     }
