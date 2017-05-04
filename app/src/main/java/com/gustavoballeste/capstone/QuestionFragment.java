@@ -101,7 +101,7 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     /**
-     * The Fragment's UI is just a simple text view showing its
+     * The Fragment's UI is just a simple description view showing its
      * instance number.
      */
     @Override

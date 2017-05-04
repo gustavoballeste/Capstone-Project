@@ -17,9 +17,11 @@
 package com.gustavoballeste.capstone.widget;
 
 public class WidgetItem {
-    public String text;
+    public String description;
+    public int imageId;
 
-    public WidgetItem(String text) {
-        this.text = text;
+    public WidgetItem(String description, int imageId) {
+        this.description = description;
+        this.imageId = imageId;
     }
 }

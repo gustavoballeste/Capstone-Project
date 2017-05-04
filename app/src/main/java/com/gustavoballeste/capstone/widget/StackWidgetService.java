@@ -51,8 +51,8 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         // In onCreate() you setup any connections / cursors to your data source. Heavy lifting,
         // for example downloading or creating content etc, should be deferred to onDataSetChanged()
         // or getViewAt(). Taking more than 20 seconds in this call will result in an ANR.
-        for (int i = 0; i < mCount; i++) {
-            mWidgetItems.add(new WidgetItem(i + "!"));
+        for (int i = 0; i < getDescription().length; i++) {
+            mWidgetItems.add(new WidgetItem(getDescription()[i], getImageId()[i]));
         }
 
         // We sleep for 3 seconds here to show how the empty view appears in the interim.
@@ -79,9 +79,10 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         // position will always range from 0 to getCount() - 1.
 
         // We construct a remote views item based on our widget item xml file, and set the
-        // text based on the position.
+        // description based on the position.
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
-        rv.setTextViewText(R.id.widget_item, mWidgetItems.get(position).text);
+        rv.setTextViewText(R.id.widget_item_description, mWidgetItems.get(position).description);
+        rv.setImageViewResource(R.id.widget_item_image, mWidgetItems.get(position).imageId);
 
         // Next, we set a fill-intent which will be used to fill-in the pending intent template
         // which is set on the collection view in StackWidgetProvider.
@@ -89,7 +90,8 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         extras.putInt(StackWidgetProvider.EXTRA_ITEM, position);
         Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
-        rv.setOnClickFillInIntent(R.id.widget_item, fillInIntent);
+        rv.setOnClickFillInIntent(R.id.widget_item_description, fillInIntent);
+        rv.setOnClickFillInIntent(R.id.widget_item_image, fillInIntent);
 
         // You can do heaving lifting in here, synchronously. For example, if you need to
         // process an image, fetch something from the network, etc., it is ok to do it here,
@@ -132,4 +134,65 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         // in its current state while work is being done here, so you don't need to worry about
         // locking up the widget.
     }
+
+    private String[] getDescription() {
+        String[] description = {
+                mContext.getResources().getString(R.string.category_general),
+                mContext.getResources().getString(R.string.category_books),
+                mContext.getResources().getString(R.string.category_film),
+                mContext.getResources().getString(R.string.category_music),
+                mContext.getResources().getString(R.string.category_theatres),
+                mContext.getResources().getString(R.string.category_television),
+                mContext.getResources().getString(R.string.category_video_games),
+                mContext.getResources().getString(R.string.category_board_games),
+                mContext.getResources().getString(R.string.category_nature),
+                mContext.getResources().getString(R.string.category_computers),
+                mContext.getResources().getString(R.string.category_mathematics),
+                mContext.getResources().getString(R.string.category_mythology),
+                mContext.getResources().getString(R.string.category_sports),
+                mContext.getResources().getString(R.string.category_geography),
+                mContext.getResources().getString(R.string.category_history),
+                mContext.getResources().getString(R.string.category_politics),
+                mContext.getResources().getString(R.string.category_art),
+                mContext.getResources().getString(R.string.category_celebrities),
+                mContext.getResources().getString(R.string.category_animals),
+                mContext.getResources().getString(R.string.category_vehicles),
+                mContext.getResources().getString(R.string.category_comics),
+                mContext.getResources().getString(R.string.category_gadgets),
+                mContext.getResources().getString(R.string.category_anime),
+                mContext.getResources().getString(R.string.category_cartoon)
+        };
+        return description;
+    }
+
+    private int[] getImageId(){
+        int[] imageId = {
+                R.drawable.ic_category_general,
+                R.drawable.ic_category_books,
+                R.drawable.ic_category_film,
+                R.drawable.ic_category_music,
+                R.drawable.ic_category_theatre,
+                R.drawable.ic_category_television,
+                R.drawable.ic_category_video_game,
+                R.drawable.ic_category_board_games,
+                R.drawable.ic_category_nature,
+                R.drawable.ic_category_computer,
+                R.drawable.ic_category_mathematics,
+                R.drawable.ic_category_mythology,
+                R.drawable.ic_category_sports,
+                R.drawable.ic_category_geography,
+                R.drawable.ic_category_history,
+                R.drawable.ic_category_politics,
+                R.drawable.ic_category_art,
+                R.drawable.ic_category_celebrity,
+                R.drawable.ic_category_animal,
+                R.drawable.ic_category_vehicle,
+                R.drawable.ic_category_comics,
+                R.drawable.ic_category_gadgets,
+                R.drawable.ic_category_anime,
+                R.drawable.ic_category_cartoon
+        };
+        return imageId;
+    }
+
 }

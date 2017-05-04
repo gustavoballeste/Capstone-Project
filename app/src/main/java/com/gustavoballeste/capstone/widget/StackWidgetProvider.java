@@ -73,10 +73,6 @@ public class StackWidgetProvider extends AppWidgetProvider {
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
             rv.setRemoteAdapter(appWidgetIds[i], R.id.stack_view, intent);
 
-            // The empty view is displayed when the collection has no items. It should be a sibling
-            // of the collection view.
-            rv.setEmptyView(R.id.stack_view, R.id.empty_view);
-
             // Here we setup the a pending intent template. Individuals items of a collection
             // cannot setup their own pending intents, instead, the collection as a whole can
             // setup a pending intent template, and the individual items can set a fillInIntent
