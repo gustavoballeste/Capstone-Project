@@ -2,28 +2,23 @@ package com.gustavoballeste.capstone.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.gustavoballeste.capstone.QuestionFragment;
 import com.gustavoballeste.capstone.R;
 import com.gustavoballeste.capstone.model.Question;
-import com.gustavoballeste.capstone.model.Score;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.ButterKnife;
 
 /**
  * Created by gustavoballeste on 18/04/17.
@@ -52,7 +47,6 @@ public class QuestionAdapter extends CursorAdapter {
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.list_item_question, parent, false);
-        ButterKnife.bind(this, view);
         return view;
     }
 

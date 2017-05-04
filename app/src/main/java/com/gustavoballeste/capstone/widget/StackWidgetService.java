@@ -59,6 +59,7 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
         rv.setTextViewText(R.id.widget_item_description, mWidgetItems.get(position).description);
         rv.setImageViewResource(R.id.widget_item_image, mWidgetItems.get(position).imageId);
+        rv.setContentDescription(R.id.widget_item_image, mWidgetItems.get(position).description);
 
         Bundle extras = new Bundle();
         extras.putInt(StackWidgetProvider.EXTRA_ITEM, position);
